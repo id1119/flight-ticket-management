@@ -1,4 +1,5 @@
 import csv
+import datetime
 
 users = {}
 flights = {}
@@ -79,7 +80,7 @@ def save_all():
             writer.writerow(row)
 
     concrete_flights_fields = {
-        "concrete_flight_id", "flight_number", "departure_date", "arrival_date"
+        "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
     }
     with open("csv_files/concrete_flights.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
@@ -105,9 +106,23 @@ def save_all():
             row = {"flight_number":flight_number, **values}
             writer.writerow(row)
 
+def available_flights():
+    today= datetime.date.today()
+    concrete_flights_fields = [
+        "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
+    ]
+    print()
+    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15}")
+    print("-" * 75)
+    for concrete_flight_number, values in concrete_flights.items():                #uzima svaki datum
+        departure_date = datetime.date.fromisoformat(concrete_flights[concrete_flight_number]["departure_date"])     #konvertuje string datuma u datum
+        if departure_date >= today:
+            print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^15} | {values[concrete_flights_fields[3]]:^15}")
 
-
-
+def search_by(parameter, value):
+    for atribute in flights.values():
+        if flights[parameter][value]== value:
+            print(atribute)
 
 
 
