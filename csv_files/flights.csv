@@ -1,0 +1,26 @@
+flight_number,departure_airport,arrival_airport,departure_time,arrival_time,next_day_arrival,airline,days_of_flight,airplane_model,price
+JU01,BEG,FRA,06:30,08:45,no,Air Serbia,Mon|Wed|Fri,A320,180
+JU02,BEG,AMS,07:15,09:30,no,Air Serbia,Tue|Thu,A320,170
+JU03,BEG,ROM,09:00,10:30,no,Air Serbia,Daily,ATR72,120
+JU04,BEG,IST,10:00,12:40,no,Air Serbia,Daily,A320,150
+LH10,FRA,BEG,14:00,16:10,no,Lufthansa,Daily,A320,190
+LH11,FRA,AMS,08:00,09:10,no,Lufthansa,Daily,A320,110
+LH12,FRA,JFK,13:00,18:30,no,Lufthansa,Mon|Thu,B737,450
+AF20,CDG,BEG,11:20,13:40,no,Air France,Daily,A320,200
+AF21,CDG,AMS,15:00,16:15,no,Air France,Daily,A320,95
+AF22,CDG,ROM,17:10,19:00,no,Air France,Mon|Fri,A320,130
+TK30,IST,BEG,06:00,07:30,no,Turkish Airlines,Daily,B737,140
+TK31,IST,DXB,22:30,03:50,yes,Turkish Airlines,Daily,B737,380
+TK32,IST,ATH,12:00,13:20,no,Turkish Airlines,Daily,ATR72,90
+EK40,DXB,IST,02:00,06:30,no,Emirates,Daily,B737,400
+EK41,DXB,JFK,08:00,16:00,no,Emirates,Daily,B737,620
+AZ50,ROM,BEG,18:00,19:30,no,ITA Airways,Daily,A320,135
+AZ51,ROM,CDG,07:30,09:45,no,ITA Airways,Daily,A320,110
+AZ52,ROM,ATH,20:00,21:10,no,ITA Airways,Daily,ATR72,80
+BA60,LHR,CDG,09:00,11:15,no,British Airways,Daily,A320,120
+BA61,LHR,JFK,14:00,22:00,no,British Airways,Daily,B737,500
+BA62,LHR,AMS,07:00,09:10,no,British Airways,Daily,A320,100
+FR70,BEG,BUD,16:00,17:10,no,Ryanair,Daily,ATR72,55
+FR71,BUD,BEG,18:00,19:10,no,Ryanair,Daily,ATR72,60
+FR72,BEG,VIE,06:00,07:20,no,Ryanair,Daily,ATR72,65
+W640,BEG,ATH,21:00,23:30,no,Wizz Air,Daily,A320,95
