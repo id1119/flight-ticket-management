@@ -74,7 +74,7 @@ def save_all():
         "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
         "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     }
-    with open("csv_files/flights.csv", "w", encoding="utf-8") as file:
+    with open("csv_files/flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=flights_fields)
         writer.writeheader()
         for flight_number, values in flights.items():
@@ -84,7 +84,7 @@ def save_all():
     concrete_flights_fields = {
         "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
     }
-    with open("csv_files/concrete_flights.csv", "w", encoding="utf-8") as file:
+    with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
         writer.writeheader()
         for concrete_flight_number, values in concrete_flights.items():
@@ -94,7 +94,7 @@ def save_all():
     airports_fields = {
         "airport_code", "airport_name", "city", "country"
     }
-    with open("csv_files/airports.csv", "w", encoding="utf-8") as file:
+    with open("csv_files/airports.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airports_fields)
         writer.writeheader()
         for airport_code, values in airports.items():
@@ -104,7 +104,7 @@ def save_all():
     airplane_models_fields = {
         "model", "rows", "seats"
     }
-    with open("csv_files/airplane_models.csv", "w", encoding="utf-8") as file:
+    with open("csv_files/airplane_models.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airplane_models_fields)
         writer.writeheader()
         for model, values in airplane_models.items():
