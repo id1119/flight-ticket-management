@@ -100,7 +100,7 @@ def save_all():
             writer.writerow(row)
 
     airplane_models_fields = {
-        "model", "seat_count"
+        "model", "rows", "seats"
     }
     with open("csv_files/airplane_models.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airplane_models_fields)
