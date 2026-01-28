@@ -86,6 +86,7 @@ def save_all():
     }
     with open("csv_files/concrete_flights.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
+        writer.writeheader()
         for concrete_flight_number, values in concrete_flights.items():
             row = {"concrete_flight_number":concrete_flight_number, **values}
             writer.writerow(row)
@@ -95,6 +96,7 @@ def save_all():
     }
     with open("csv_files/airports.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airports_fields)
+        writer.writeheader()
         for airport_code, values in airports.items():
             row = {"airport_code":airport_code, **values}
             writer.writerow(row)
@@ -104,6 +106,7 @@ def save_all():
     }
     with open("csv_files/airplane_models.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airplane_models_fields)
+        writer.writeheader()
         for model, values in airplane_models.items():
             row = {"model":model, **values}
             writer.writerow(row)
