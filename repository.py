@@ -1,7 +1,6 @@
 import csv
 import datetime
 import copy
-import main
 
 users = {}
 flights = {}
@@ -143,12 +142,12 @@ def search_by(parameter, value):
         #         print(
         #             f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
 
-def search_by_multiple(parameter, value):
-    for flight_number, values in main.flights_copy.items():
-        if main.flights_copy[flight_number][parameter] != value:
-            del main.flights_copy[flight_number]
+def search_by_multiple(flights_copy, parameter, value):         #prosledjujem recnik zato sto nije dobro brisati kljuc u recniku dok se iterira kroz njega. dodje do greske
+    for flight_number in list(flights_copy.keys()):             #gledamo recnik kao listu
+        if flights_copy[flight_number][parameter] != value:
+            del flights_copy[flight_number]
 
-def print_search_by_multiple():
+def print_search_by_multiple(flights_copy):
     flights_fields = [
         "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
         "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
@@ -156,9 +155,8 @@ def print_search_by_multiple():
     print()
     print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
     print("-" * 177)
-    for flight_number, values in main.flights_copy.items():
+    for flight_number, values in flights_copy.items():
         print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
-    for flight_number, values in main.flights_copy.items():
-        print(flight_number, values)
+
 
 
