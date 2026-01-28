@@ -1,5 +1,7 @@
 import csv
 import datetime
+import copy
+import main
 
 users = {}
 flights = {}
@@ -120,12 +122,40 @@ def available_flights():
             print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^15} | {values[concrete_flights_fields[3]]:^15}")
 
 def search_by(parameter, value):
-    for atribute in flights.values():
-        if flights[parameter][value]== value:
-            print(atribute)
+    flights_fields = [
+        "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
+        "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+    ]
+    print()
+    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
+    print("-" * 177)
+
+    for flight_number, values in flights.items():
+            if flights[flight_number][parameter]== value:
+                print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
 
 
+        # except Exception:
+        #     if concrete_flights["concrete_flight_number"][parameter] == value:
+        #         print(
+        #             f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
 
+def search_by_multiple(parameter, value):
+    for flight_number, values in main.flights_copy.items():
+        if main.flights_copy[flight_number][parameter] != value:
+            del main.flights_copy[flight_number]
 
+def print_search_by_multiple():
+    flights_fields = [
+        "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
+        "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+    ]
+    print()
+    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
+    print("-" * 177)
+    for flight_number, values in main.flights_copy.items():
+        print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
+    for flight_number, values in main.flights_copy.items():
+        print(flight_number, values)
 
 
