@@ -1,26 +1,25 @@
-departure_time,flight_number,airline,arrival_airport,days_of_flight,airplane_model,next_day_arrival,departure_airport,price,arrival_time
-06:30,JU01,Air Serbia,FRA,Mon|Wed|Fri,A320,no,BEG,180,08:45
-07:15,JU02,Air Serbia,AMS,Tue|Thu,A320,no,BEG,170,09:30
-09:00,JU03,Air Serbia,ROM,Daily,ATR72,no,BEG,120,10:30
-10:00,JU04,Air Serbia,IST,Daily,A320,no,BEG,150,12:40
-14:00,LH10,Lufthansa,BEG,Daily,A320,no,FRA,190,16:10
-08:00,LH11,Lufthansa,AMS,Daily,A320,no,FRA,110,09:10
-13:00,LH12,Lufthansa,JFK,Mon|Thu,B737,no,FRA,450,18:30
-11:20,AF20,Air France,BEG,Daily,A320,no,CDG,200,13:40
-15:00,AF21,Air France,AMS,Daily,A320,no,CDG,95,16:15
-17:10,AF22,Air France,ROM,Mon|Fri,A320,no,CDG,130,19:00
-06:00,TK30,Turkish Airlines,BEG,Daily,B737,no,IST,140,07:30
-22:30,TK31,Turkish Airlines,DXB,Daily,B737,yes,IST,380,03:50
-12:00,TK32,Turkish Airlines,ATH,Daily,ATR72,no,IST,90,13:20
-02:00,EK40,Emirates,IST,Daily,B737,no,DXB,400,06:30
-08:00,EK41,Emirates,JFK,Daily,B737,no,DXB,620,16:00
-18:00,AZ50,ITA Airways,BEG,Daily,A320,no,ROM,135,19:30
-07:30,AZ51,ITA Airways,CDG,Daily,A320,no,ROM,110,09:45
-20:00,AZ52,ITA Airways,ATH,Daily,ATR72,no,ROM,80,21:10
-09:00,BA60,British Airways,CDG,Daily,A320,no,LHR,120,11:15
-14:00,BA61,British Airways,JFK,Daily,B737,no,LHR,500,22:00
-07:00,BA62,British Airways,AMS,Daily,A320,no,LHR,100,09:10
-16:00,FR70,Ryanair,BUD,Daily,ATR72,no,BEG,55,17:10
-18:00,FR71,Ryanair,BEG,Daily,ATR72,no,BUD,60,19:10
-06:00,FR72,Ryanair,VIE,Daily,ATR72,no,BEG,65,07:20
-21:00,W640,Wizz Air,ATH,Daily,A320,no,BEG,95,23:30
+flight_number,departure_airport,arrival_airport,departure_time,arrival_time,next_day_arrival,airline,days_of_flight,airplane_model,price
+JU01,BEG,FRA,06:30,08:45,no,Air Serbia,Mon|Wed|Fri,A320,180
+JU02,BEG,AMS,07:15,09:30,no,Air Serbia,Tue|Thu|Sun,A320,170
+JU03,BEG,ROM,09:00,10:30,no,Air Serbia,Mon|Sat,ATR72,120
+JU04,BEG,IST,10:00,12:40,no,Air Serbia,Tue|Fri|Sun,A320,150
+JU05,BEG,ATH,14:20,16:10,no,Air Serbia,Wed|Sat,A320,140
+LH10,FRA,BEG,14:00,16:10,no,Lufthansa,Mon|Thu|Sun,A320,190
+LH11,FRA,AMS,08:00,09:10,no,Lufthansa,Tue|Wed|Fri,A320,110
+LH12,FRA,JFK,13:00,18:30,no,Lufthansa,Mon|Thu,B737,450
+LH13,FRA,CDG,18:40,19:55,no,Lufthansa,Wed|Sat,A320,95
+AF20,CDG,BEG,11:20,13:40,no,Air France,Mon|Thu|Sun,A320,200
+AF21,CDG,AMS,15:00,16:15,no,Air France,Tue|Fri,A320,95
+AF22,CDG,ROM,17:10,19:00,no,Air France,Wed|Sat,A320,130
+TK30,IST,BEG,06:00,07:30,no,Turkish Airlines,Mon|Wed|Fri,B737,140
+TK31,IST,DXB,22:30,03:50,yes,Turkish Airlines,Tue|Thu|Sun,B737,380
+TK32,IST,ATH,12:00,13:20,no,Turkish Airlines,Mon|Sat,ATR72,90
+EK40,DXB,IST,02:00,06:30,no,Emirates,Wed|Fri,B737,400
+EK41,DXB,JFK,08:00,16:00,no,Emirates,Mon|Thu|Sun,B737,620
+AZ50,ROM,BEG,18:00,19:30,no,ITA Airways,Mon|Wed|Sat,A320,135
+AZ51,ROM,CDG,07:30,09:45,no,ITA Airways,Tue|Fri,A320,110
+AZ52,ROM,ATH,20:00,21:10,no,ITA Airways,Thu|Sun,ATR72,80
+BA60,LHR,CDG,09:00,11:15,no,British Airways,Mon|Wed|Fri,A320,120
+BA61,LHR,JFK,14:00,22:00,no,British Airways,Tue|Thu|Sun,B737,500
+BA62,LHR,AMS,07:00,09:10,no,British Airways,Wed|Sat,A320,100
+FR70,BEG,BUD,16:00,17:10,no,Ryanair,Mon|Fri|Sun,ATR72,55
