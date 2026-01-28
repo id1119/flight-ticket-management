@@ -37,10 +37,8 @@ def search_flight_by_multiple_menu():
 def main():
     while True:
         repo.load_all()
-        print(repo.flights)
         print(menu())
         choice = input("Please choose functionality: ")
-        print(repo.flights)
         if choice == '1':       #login
             iu.login()          #vraca poziciju ulogovanog
         elif choice == '2':

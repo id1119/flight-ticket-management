@@ -95,8 +95,8 @@ def save_all():
     }
     with open("csv_files/airports.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airports_fields)
-        for flight_number, values in airports.items():
-            row = {"flight_number":flight_number, **values}
+        for airport_code, values in airports.items():
+            row = {"airport_code":airport_code, **values}
             writer.writerow(row)
 
     airplane_models_fields = {
@@ -104,8 +104,8 @@ def save_all():
     }
     with open("csv_files/airplane_models.csv", "w", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airplane_models_fields)
-        for flight_number, values in airplane_models.items():
-            row = {"flight_number":flight_number, **values}
+        for model, values in airplane_models.items():
+            row = {"model":model, **values}
             writer.writerow(row)
 
 def available_flights():
