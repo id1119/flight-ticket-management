@@ -71,8 +71,8 @@ def save_all():
             writer.writerow(row)
 
     flights_fields = {
-        "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
-        "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+        "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     }
     with open("csv_files/flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=flights_fields)
@@ -126,8 +126,8 @@ def available_flights():
 
 def search_by(parameter, value):
     flights_fields = [
-        "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
-        "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+        "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     ]
     print()
     print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
@@ -150,8 +150,8 @@ def search_by_multiple(parameter, value):
 
 def print_search_by_multiple():
     flights_fields = [
-        "flight_number", "departure_airport", "arrival_airport", "departure_time", "arrival_time",
-        "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+        "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     ]
     print()
     print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
