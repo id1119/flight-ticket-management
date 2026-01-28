@@ -37,8 +37,10 @@ def search_flight_by_multiple_menu():
 def main():
     while True:
         repo.load_all()
+        print(repo.flights)
         print(menu())
         choice = input("Please choose functionality: ")
+        print(repo.flights)
         if choice == '1':       #login
             iu.login()          #vraca poziciju ulogovanog
         elif choice == '2':
@@ -84,6 +86,7 @@ def main():
                 choose = input("Select one of parameters that you want to search by: ")
                 global flights_copy
                 flights_copy = copy.deepcopy(repo.flights)
+                # print(flights_copy)
                 if choose == '1':
                     parameter = "departure_airport"
                     value = input("Enter departure airport: ")

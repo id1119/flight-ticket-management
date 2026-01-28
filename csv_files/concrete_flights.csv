@@ -1,4 +1,4 @@
-concrete_flight_id,flight_number,departure_date,arrival_date
+concrete_flight_number,flight_number,departure_date,arrival_date
 1001,JU01,2026-02-03,2026-02-03
 1002,JU01,2026-02-14,2026-02-14
 1003,JU01,2026-03-01,2026-03-01
