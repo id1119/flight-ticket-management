@@ -1,11 +1,11 @@
-airport_code,city,country,airport_name
-BEG,Beograd,Serbia,Nikola Tesla Airport
-FRA,Frankfurt,Germany,Frankfurt Airport
-AMS,Amsterdam,Netherlands,Schiphol Airport
-CDG,Paris,France,Charles de Gaulle Airport
-IST,Istanbul,Turkey,Istanbul Airport
-ROM,Rome,Italy,Fiumicino Airport
-LHR,London,UK,Heathrow Airport
-JFK,New York,USA,John F Kennedy Airport
-DXB,Dubai,UAE,Dubai International Airport
-ATH,Athens,Greece,Eleftherios Venizelos Airport
+airport_code,country,city,airport_name
+BEG,Serbia,Beograd,Nikola Tesla Airport
+FRA,Germany,Frankfurt,Frankfurt Airport
+AMS,Netherlands,Amsterdam,Schiphol Airport
+CDG,France,Paris,Charles de Gaulle Airport
+IST,Turkey,Istanbul,Istanbul Airport
+ROM,Italy,Rome,Fiumicino Airport
+LHR,UK,London,Heathrow Airport
+JFK,USA,New York,John F Kennedy Airport
+DXB,UAE,Dubai,Dubai International Airport
+ATH,Greece,Athens,Eleftherios Venizelos Airport

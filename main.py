@@ -15,22 +15,22 @@ def search_flight_by_menu():
     print("===Search flight by===")
     print("1) Departure airport")
     print("2) Arrival airport")
-    # print("3) Departure date")
-    # print("4) Arrival date")
-    print("3) Departure time")
-    print("4) Arrival time")
-    print("5) Airline")
+    print("3) Departure date")
+    print("4) Arrival date")
+    print("5) Departure time")
+    print("6) Arrival time")
+    print("7) Airline")
     print("x) Go back to main menu")
 
 def search_flight_by_multiple_menu():
     print("===Search flights by multiple parameters===")
     print("1) Departure airport")
     print("2) Arrival airport")
-    # print("3) Departure date")
-    # print("4) Arrival date")
-    print("3) Departure time")
-    print("4) Arrival time")
-    print("5) Airline")
+    print("3) Departure date")
+    print("4) Arrival date")
+    print("5) Departure time")
+    print("6) Arrival time")
+    print("7) Airline")
     print("s) Search!!!")
     print("x) Go back to main menu")
 
@@ -61,14 +61,22 @@ def main():
                     value = input("Enter arrival airport: ")
                     repo.search_by(parameter, value)
                 elif choose == '3':
+                    parameter = "departure_date"
+                    value = input("Enter departure date: ")
+                    repo.search_by(parameter, value)
+                elif choose == '4':
+                    parameter = "arrival_date"
+                    value = input("Enter arrival date: ")
+                    repo.search_by(parameter, value)
+                elif choose == '5':
                     parameter = "departure_time"
                     value = input("Enter departure time: ")
                     repo.search_by(parameter, value)
-                elif choose == '4':
+                elif choose == '6':
                     parameter = "arrival_time"
                     value = input("Enter arrival time: ")
                     repo.search_by(parameter, value)
-                elif choose == '5':
+                elif choose == '7':
                     parameter = "airline"
                     value = input("Enter airline: ")
                     repo.search_by(parameter, value)
@@ -94,20 +102,28 @@ def main():
                     value = input("Enter arrival airport: ")
                     repo.search_by_multiple(parameter, value)
                 elif choose == '3':
+                    parameter = "departure_date"
+                    value = input("Enter departure date: ")
+                    repo.search_by_multiple(parameter, value)
+                elif choose == '4':
+                    parameter = "arrival_date"
+                    value = input("Enter arrival date: ")
+                    repo.search_by_multiple(parameter, value)
+                elif choose == '5':
                     parameter = "departure_time"
                     value = input("Enter departure time: ")
                     repo.search_by_multiple(parameter, value)
-                elif choose == '4':
+                elif choose == '6':
                     parameter = "arrival_time"
                     value = input("Enter arrival time: ")
                     repo.search_by_multiple(parameter, value)
-                elif choose == '5':
+                elif choose == '7':
                     parameter = "airline"
                     value = input("Enter airline: ")
                     repo.search_by_multiple(parameter, value)
-                elif choose == 's':
+                elif choose == 's' or 'S':
                     repo.print_search_by_multiple()
-                elif choose == 'x':
+                elif choose == 'x' or 'X':
                     print("Going back..")
                     break
                 else:

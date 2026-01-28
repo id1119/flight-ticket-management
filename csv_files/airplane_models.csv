@@ -1,4 +1,4 @@
-model,seats,rows
-A320,A|B|C|D|E|F,30
-B737,A|B|C|D|E|F,28
-ATR72,A|B|C|D,18
+seats,rows,model
+A|B|C|D|E|F,30,A320
+A|B|C|D|E|F,28,B737
+A|B|C|D,18,ATR72
