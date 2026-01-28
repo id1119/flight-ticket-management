@@ -70,10 +70,10 @@ def save_all():
                    **values}  # **values koristimo zato sto prosledjujemo kao red samo JEDAN recnik a da
             writer.writerow(row)
 
-    flights_fields = {
+    flights_fields = [
         "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
         "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
-    }
+    ]
     with open("csv_files/flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=flights_fields)
         writer.writeheader()
@@ -81,9 +81,9 @@ def save_all():
             row = {"flight_number":flight_number, **values}
             writer.writerow(row)
 
-    concrete_flights_fields = {
+    concrete_flights_fields = [
         "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
-    }
+    ]
     with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
         writer.writeheader()
@@ -91,9 +91,9 @@ def save_all():
             row = {"concrete_flight_number":concrete_flight_number, **values}
             writer.writerow(row)
 
-    airports_fields = {
+    airports_fields = [
         "airport_code", "airport_name", "city", "country"
-    }
+    ]
     with open("csv_files/airports.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airports_fields)
         writer.writeheader()
@@ -101,9 +101,9 @@ def save_all():
             row = {"airport_code":airport_code, **values}
             writer.writerow(row)
 
-    airplane_models_fields = {
+    airplane_models_fields = [
         "model", "rows", "seats"
-    }
+    ]
     with open("csv_files/airplane_models.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=airplane_models_fields)
         writer.writeheader()
