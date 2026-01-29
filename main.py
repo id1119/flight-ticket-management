@@ -10,6 +10,7 @@ def menu():
     print("3) View available flights")
     print("4) Search flight by")
     print("5) Search flight by multiple parameters")
+    print("6) View 10 cheapest flights between two destinations")
 
 def search_flight_by_menu():
     print("===Search flight by===")
@@ -49,7 +50,7 @@ def main():
             repo.available_flights()
         elif choice =='4':
             while True:
-                choose=''
+                # choose=''
                 search_flight_by_menu()
                 choose = input("What do you want to search by?: ")
                 if choose == '1':
@@ -89,7 +90,6 @@ def main():
             global flights_copy
             flights_copy = copy.deepcopy(repo.flights)
             while True:
-                choose=''
                 search_flight_by_multiple_menu()
                 choose = input("Select one of parameters that you want to search by: ")
                 if choose == '1':
@@ -127,6 +127,21 @@ def main():
                     break
                 else:
                     print("[ERROR] Invalid input!")
+        elif choice == '6':
+            flights_copy = copy.deepcopy(repo.flights)
+            departure_airport = input("Enter departure airport: ")
+            repo.search_by_multiple(flights_copy,"departure_airport", departure_airport )
+            arrival_airport = input("Enter arrival airport: ")
+            repo.search_by_multiple(flights_copy,"arrival_airport", arrival_airport )
+            repo.print_ten_cheapest_flights(flights_copy)
+        elif choice == '7':
+            flights_copy = copy.deepcopy(repo.flights)
+            departure_airport = input("Enter departure airport: ")
+            repo.search_by_multiple(flights_copy,"departure_airport", departure_airport )
+            arrival_airport = input("Enter arrival airport: ")
+            repo.search_by_multiple(flights_copy,"arrival_airport", arrival_airport )
+            date = input("Enter date of flight: ")
+            days = input("Enter number of flexible days: ")
 
 
 if __name__=="__main__":

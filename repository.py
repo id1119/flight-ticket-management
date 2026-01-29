@@ -1,6 +1,5 @@
 import csv
 import datetime
-import copy
 
 users = {}
 flights = {}
@@ -61,12 +60,11 @@ def save_all():
         "username", "password", "name", "last_name", "position",
         "passport_number", "citizenship", "phone_number", "email", "gender"
     ]
-    with open("csv_files/test.csv", "w", newline="", encoding="utf-8") as file:  # newline izbegava prazne redove
+    with open("csv_files/users.csv", "w", newline="", encoding="utf-8") as file:  # newline izbegava prazne redove
         writer = csv.DictWriter(file, fieldnames=users_fields)
         writer.writeheader()
         for username, values in users.items():
-            row = {"username": username,
-                   **values}  # **values koristimo zato sto prosledjujemo kao red samo JEDAN recnik a da
+            row = {"username": username, **values}  # **values koristimo zato sto prosledjujemo kao red samo JEDAN recnik a da
             writer.writerow(row)
 
     flights_fields = [
@@ -129,18 +127,13 @@ def search_by(parameter, value):
         "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     ]
     print()
-    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
-    print("-" * 177)
+    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^23} | {flights_fields[9]:^15} | {flights_fields[10]:^15} | {flights_fields[11]:^15} ")
+    print("-" * 220)
 
     for flight_number, values in flights.items():
             if flights[flight_number][parameter]== value:
-                print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
+                print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^15} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^16} | {values[flights_fields[8]]:^23} | {values[flights_fields[9]]:^15} | {values[flights_fields[10]]:^15} | {values[flights_fields[11]]:^15}")
 
-
-        # except Exception:
-        #     if concrete_flights["concrete_flight_number"][parameter] == value:
-        #         print(
-        #             f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
 
 def search_by_multiple(flights_copy, parameter, value):         #prosledjujem recnik zato sto nije dobro brisati kljuc u recniku dok se iterira kroz njega. dodje do greske
     for flight_number in list(flights_copy.keys()):             #gledamo recnik kao listu
@@ -153,10 +146,35 @@ def print_search_by_multiple(flights_copy):
         "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     ]
     print()
-    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^15} | {flights_fields[9]:^15}")
-    print("-" * 177)
+    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^23} | {flights_fields[9]:^15} | {flights_fields[10]:^15} | {flights_fields[11]:^15} ")
+    print("-" * 220)
     for flight_number, values in flights_copy.items():
-        print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^16} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^15} | {values[flights_fields[8]]:^15} | {values[flights_fields[9]]:^15}")
+        print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^15} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^16} | {values[flights_fields[8]]:^23} | {values[flights_fields[9]]:^15} | {values[flights_fields[10]]:^15} | {values[flights_fields[11]]:^15}")
 
 
+def print_ten_cheapest_flights(flights_copy):
+    flights_fields = [
+        "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+    ]
+    sorted_flights = dict(                          # sortiramo recnik preko liste pa vracamo u recnik zato sto ne moze da se sortira direktno recnik
+        sorted(
+            flights_copy.items(),
+            key=lambda item: int(item[1]["price"])  # item = ("JU01", {"price": "120"}) lambda se koristi kako bi usli u vrednosti recnika, da ga nema sortirali bi samo po nazivima a ne po vrednostima(ceni)
+        )[:10]
+    )
+    cheapest_sorted_flights = dict(
+        sorted(
+            sorted_flights.items(),
+            key=lambda item: int(item[1]["price"])
+        )
+    )
+    print()
+    print(f"{flights_fields[0]:^15} | {flights_fields[1]:^15} | {flights_fields[2]:^15} | {flights_fields[3]:^15} | {flights_fields[4]:^15} | {flights_fields[5]:^15} | {flights_fields[6]:^15} | {flights_fields[7]:^15} | {flights_fields[8]:^23} | {flights_fields[9]:^15} | {flights_fields[10]:^15} | {flights_fields[11]:^15} ")
+    print("-" * 220)
+    for flight_number, values in cheapest_sorted_flights.items():
+        print(f"{values[flights_fields[0]]:^15} | {values[flights_fields[1]]:^17} | {values[flights_fields[2]]:^15} | {values[flights_fields[3]]:^15} | {values[flights_fields[4]]:^15} | {values[flights_fields[5]]:^15} | {values[flights_fields[6]]:^15} | {values[flights_fields[7]]:^16} | {values[flights_fields[8]]:^23} | {values[flights_fields[9]]:^15} | {values[flights_fields[10]]:^15} | {values[flights_fields[11]]:^15}")
 
+def print_flights_by_search_date(flights_copy, date, days):
+    date_min= datetime.date-days
+    print(date_min)

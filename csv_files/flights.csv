@@ -2,7 +2,7 @@ flight_number,departure_airport,arrival_airport,departure_date,arrival_date,depa
 JU01,BEG,FRA,2026-02-03,2026-02-03,06:30,08:45,no,Air Serbia,Mon|Wed|Fri,A320,180
 JU02,BEG,CDG,2026-02-05,2026-02-05,09:10,11:30,no,Air Serbia,Tue|Sat,A320,210
 JU03,BEG,AMS,2026-01-28,2026-01-28,07:00,09:40,no,Air Serbia,Mon|Thu,A319,195
-JU04,BEG,ZRH,2026-03-06,2026-03-06,12:15,14:00,no,Air Serbia,Fri|Sun,A319,170
+JU04,BEG,ATH,2026-03-06,2026-03-06,12:15,14:00,no,Air Serbia,Fri|Sun,A319,170
 JU05,BEG,ATH,2026-05-11,2026-05-11,18:40,21:10,no,Air Serbia,Wed|Sun,ATR72,150
 LH10,FRA,BEG,2026-02-01,2026-02-01,08:00,10:10,no,Lufthansa,Mon|Thu,A320,190
 LH11,MUC,BEG,2026-01-30,2026-01-30,14:30,16:20,no,Lufthansa,Tue|Fri,A320,200
