@@ -68,8 +68,8 @@ def save_all():
             writer.writerow(row)
 
     flights_fields = [
-        "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+        "flight_number", "departure_airport", "arrival_airport","departure_time",
+        "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
     ]
     with open("csv_files/flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=flights_fields)
@@ -79,7 +79,8 @@ def save_all():
             writer.writerow(row)
 
     concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
+        "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
     ]
     with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
@@ -111,15 +112,16 @@ def save_all():
 def available_flights():
     today= datetime.date.today()
     concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_date", "arrival_date"
+        "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
     ]
     print()
-    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15}")
-    print("-" * 75)
+    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
+    print("-" * 230)
     for concrete_flight_number, values in concrete_flights.items():                #uzima svaki datum
         departure_date = datetime.date.fromisoformat(concrete_flights[concrete_flight_number]["departure_date"])     #konvertuje string datuma u datum
         if departure_date >= today:
-            print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^15} | {values[concrete_flights_fields[3]]:^15}")
+            print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
 
 def search_by(parameter, value):
     flights_fields = [
