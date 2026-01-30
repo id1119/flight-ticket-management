@@ -44,7 +44,7 @@ def unregistered_menu_main():
         elif choice == '2':
             print("Exiting...")
             repo.save_all()
-            break
+            return False
         elif choice == '3':
             repo.available_flights()
         elif choice == '4':
@@ -169,5 +169,7 @@ def unregistered_menu_main():
                 "citizenship" : citizenship,
                 "gender" : gender,
             }
+        else:
+            print("[ERROR] Invalid input! Please try again.")
 if __name__ == '__main__':
     unregistered_menu_main()
