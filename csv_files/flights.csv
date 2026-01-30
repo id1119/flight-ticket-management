@@ -1,25 +1,21 @@
 flight_number,departure_airport,arrival_airport,departure_time,arrival_time,next_day_arrival,airline,days_of_flight,airplane_model,price
-JU01,BEG,CDG,08:30,10:45,no,AirSerbia,Mon|Wed|Fri,A320,120
-JU02,BEG,FCO,09:15,11:30,no,AirSerbia,Tue|Thu|Sat,A320,140
-JU03,BEG,FRA,07:00,09:00,no,AirSerbia,Mon|Tue|Wed|Thu|Fri,A319,110
-JU04,BEG,AMS,06:45,09:10,no,AirSerbia,Mon|Thu,A320,150
-JU05,BEG,ATH,14:20,16:00,no,AirSerbia,Wed|Sun,A319,100
-LH10,FRA,BEG,14:20,16:15,no,Lufthansa,Mon|Wed|Fri,A320,180
-LH11,FRA,CDG,10:10,11:30,no,Lufthansa,Tue|Thu,A320,160
-LH12,MUC,BEG,12:40,14:20,no,Lufthansa,Mon|Fri,A319,170
-LH13,MUC,AMS,08:00,09:45,no,Lufthansa,Wed|Sun,A320,155
-AF20,CDG,BEG,16:40,19:00,no,AirFrance,Mon|Thu|Sun,A320,170
-AF21,CDG,FCO,07:10,09:20,no,AirFrance,Tue|Sat,A320,165
-AF22,CDG,AMS,18:00,19:10,no,AirFrance,Mon|Fri,A319,145
-TK30,IST,BEG,09:00,10:30,no,Turkish,Mon|Wed|Fri,A321,130
-TK31,IST,BEG,22:50,00:30,yes,Turkish,Mon|Fri,A321,200
-TK32,IST,FRA,13:15,15:45,no,Turkish,Tue|Sun,A321,175
-EK40,DXB,BEG,09:00,14:20,no,Emirates,Wed|Sat,B777,450
-EK41,DXB,FRA,23:40,05:50,yes,Emirates,Mon|Thu,B777,520
-AZ50,FCO,BEG,06:30,08:20,no,ITA,Mon|Tue|Thu,A319,150
-AZ51,FCO,CDG,11:10,13:00,no,ITA,Wed|Sun,A320,140
-AZ52,FCO,AMS,17:40,20:10,no,ITA,Fri|Sat,A320,155
-BA60,LHR,BEG,12:15,15:50,no,British,Mon|Wed|Fri,A320,190
-BA61,LHR,CDG,09:30,11:50,no,British,Tue|Thu,A320,170
-BA62,LHR,FRA,18:20,20:40,no,British,Sat|Sun,A320,185
-FR70,BEG,BER,05:55,07:40,no,Ryanair,Mon|Thu|Sun,B737,80
+JU01,BEG,CDG,08:30,10:45,no,Air Serbia,Mon|Wed|Fri,A320,120
+JU02,BEG,FCO,09:15,11:30,no,Air Serbia,Tue|Thu|Sat,A320,140
+JU03,BEG,FRA,07:00,09:00,no,Air Serbia,Mon|Tue|Wed|Thu|Fri,A319,110
+JU04,BEG,AMS,06:45,09:10,no,Air Serbia,Mon|Thu,A320,150
+JU05,BEG,ATH,14:20,16:00,no,Air Serbia,Wed|Sun,A319,100
+AF20,CDG,BEG,16:40,19:00,no,Air France,Mon|Thu|Sun,A320,170
+AF21,CDG,FCO,07:10,09:20,no,Air France,Tue|Sat,A320,165
+AF22,CDG,AMS,18:00,19:10,no,Air France,Mon|Fri,A319,145
+TK30,IST,BEG,09:00,10:30,no,Turkish Airlines,Mon|Wed|Fri,A321,130
+TK31,IST,BEG,22:50,00:30,yes,Turkish Airlines,Mon|Fri,A321,200
+TK32,IST,FRA,13:15,15:45,no,Turkish Airlines,Tue|Sun,A321,175
+EK40,DXB,BEG,09:00,14:20,no,Emirates Airline,Wed|Sat,B777,450
+EK41,DXB,FRA,23:40,05:50,yes,Emirates Airline,Mon|Thu,B777,520
+AZ50,FCO,BEG,06:30,08:20,no,ITA Airways,Mon|Tue|Thu,A319,150
+AZ51,FCO,CDG,11:10,13:00,no,ITA Airways,Wed|Sun,A320,140
+AZ52,FCO,AMS,17:40,20:10,no,ITA Airways,Fri|Sat,A320,155
+BA60,LHR,BEG,12:15,15:50,no,British Airways,Mon|Wed|Fri,A320,190
+BA61,LHR,CDG,09:30,11:50,no,British Airways,Tue|Thu,A320,170
+BA62,LHR,FRA,18:20,20:40,no,British Airways,Sat|Sun,A320,185
+FR70,BEG,BER,05:55,07:40,no,Ryanair DAC,Mon|Thu|Sun,B737,80
