@@ -1,13 +1,12 @@
-import csv
 import datetime
+import csv
 
 users = {}
 flights = {}
 concrete_flights = {}
 airports = {}
 airplane_models = {}
-
-
+tickets = {}
 
 def load_all():
     global users
@@ -50,9 +49,13 @@ def load_all():
             model = row["model"]
             airplane_models[model] = row
 
-if __name__=="__main__":
- pass
-
+    global tickets
+    tickets = {}
+    with open("csv_files/tickets.csv", "r", encoding="utf-8") as file:
+        rows = csv.DictReader(file)
+        for row in rows:
+            ticket = row["ticket_number"]
+            tickets[ticket] = row
 
 def save_all():
 
@@ -80,7 +83,7 @@ def save_all():
 
     concrete_flights_fields = [
         "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price", "has_free_seats"
     ]
     with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
@@ -109,29 +112,42 @@ def save_all():
             row = {"model":model, **values}
             writer.writerow(row)
 
-def available_flights():
-    today= datetime.datetime.today()
-    concrete_flights_fields = [
-        "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
+    tickets_fields = [
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat"
+    ]
+    with open("csv_files/tickets.csv", "w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=tickets_fields)
+        writer.writeheader()
+        for ticket, values in tickets.items():
+            row = {"ticket": ticket, **values}
+            writer.writerow(row)
+
+concrete_flights_fields = [
+        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date",
+        "arrival_date",
         "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
     ]
+
+def concrete_flights_print_header():
+    global concrete_flights_fields
     print()
-    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
+    print(
+        f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
     print("-" * 230)
+
+
+def available_flights():
+    today= datetime.datetime.today()
+    global concrete_flights_fields
+    concrete_flights_print_header()
     for concrete_flight_number, values in concrete_flights.items():                #uzima svaki datum
         departure_date = datetime.datetime.strptime(concrete_flights[concrete_flight_number]["departure_date"],"%d.%m.%Y")   #konvertuje string datuma u datum
         if departure_date >= today:
             print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
 
 def search_by(parameter, value):
-    concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
-    ]
-    print()
-    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
-    print("-" * 230)
-
+    global concrete_flights_fields
+    concrete_flights_print_header()
     for concrete_flight_number, values in concrete_flights.items():
             if concrete_flights[concrete_flight_number][parameter]== value:
                 print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
@@ -143,23 +159,14 @@ def search_by_multiple(concrete_flights_copy, parameter, value):         #prosle
             del concrete_flights_copy[flight_number]
 
 def print_search_by_multiple(concrete_flights_copy):
-    concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
-    ]
-    print()
-    print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
-    print("-" * 230)
+    global concrete_flights_fields
+    concrete_flights_print_header()
 
     for flight_number, values in concrete_flights_copy.items():
         print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
 
 
 def print_ten_cheapest_flights(concrete_flights_copy):
-    concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
-    ]
     sorted_flights = dict(                          # sortiramo recnik preko liste pa vracamo u recnik zato sto ne moze da se sortira direktno recnik
         sorted(
             concrete_flights_copy.items(),          #uzimamo 10 najjeftinijih letova
@@ -173,29 +180,71 @@ def print_ten_cheapest_flights(concrete_flights_copy):
             reverse = True
         )
     )
-    print()
-    print(
-        f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
-    print("-" * 230)
-
+    global concrete_flights_fields
+    concrete_flights_print_header()
     for flight_number, values in cheapest_sorted_flights.items():
         print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
 
 def print_flights_by_search_date(concrete_flights_copy, date, days):
     date_delta = datetime.datetime.strptime(date, "%d.%m.%Y")
     days_delta = datetime.timedelta(days=int(days))
+
     date_min = date_delta - days_delta
     date_max = date_delta + days_delta
-    concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
-    ]
-    print()
-    print(
-        f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^15} | {concrete_flights_fields[3]:^15} | {concrete_flights_fields[4]:^15} | {concrete_flights_fields[5]:^15} | {concrete_flights_fields[6]:^15} | {concrete_flights_fields[7]:^15} | {concrete_flights_fields[8]:^15} | {concrete_flights_fields[9]:^24} | {concrete_flights_fields[10]:^15} | {concrete_flights_fields[11]:^15}")
-    print("-" * 230)
+
+    global concrete_flights_fields
+    concrete_flights_print_header()
 
     for flight_number, values in concrete_flights_copy.items():
         concrete_flight_date = datetime.datetime.strptime(concrete_flights_copy[flight_number]["departure_date"], "%d.%m.%Y")
         if date_min <= concrete_flight_date <= date_max:
             print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
+
+def buy_ticket(concrete_flight_number):
+    pass
+
+
+def has_free_seats(concrete_flight_number):
+    airplane_model = concrete_flights[concrete_flight_number]["airplane_model"]
+    seats_in_row = len((airplane_models[airplane_model]["seats"]).split("|"))
+    total_seats = int(airplane_models[airplane_model]["rows"]) * seats_in_row
+    used_seats = 0
+    for ticket, values in tickets.items():
+        if tickets[ticket]["concrete_flight_number"] == concrete_flight_number:
+            used_seats+=1
+    free_seats = total_seats - used_seats
+    return free_seats
+
+def generate_ticket_number():
+    max_ticket = 0
+    for ticket in tickets.keys():
+        if int(ticket)>max_ticket:
+            max_ticket = int(ticket)
+    max_ticket+=1
+    return max_ticket
+
+def view_connected_flights(flight_number):
+    arrival_date = concrete_flights[flight_number]["arrival_date"]
+    arrival_time = concrete_flights[flight_number]["arrival_time"]
+    date_time = datetime.datetime.strptime(arrival_date, arrival_time)
+
+def print_by_dt_min_max(concrete_flights_copy, arrival_dt, arrival_dt_max):
+    global concrete_flights_fields
+    concrete_flights_print_header()
+
+    for concrete_flight_number, values in concrete_flights_copy.items():
+        arrival_date = concrete_flights_copy[concrete_flight_number]["arrival_date"]
+        arrival_time = concrete_flights_copy[concrete_flight_number]["arrival_time"]
+        current_dt = datetime.datetime.strptime(
+            arrival_date + " " + arrival_time,
+            "%d.%m.%Y %H:%M"
+        )
+
+        if arrival_dt < current_dt <= arrival_dt_max:
+            print(
+                f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
+
+
+if __name__ == '__main__':
+    load_all()
+    generate_ticket_number()

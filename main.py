@@ -1,18 +1,20 @@
-import repository as repo
-import inputs as iu
-import universal_menu as universal
-import copy
-import unregistered_menu as unregistered
-
-concrete_flights_copy = {}
+from projekat.menus import (unregistered_menu as unregistered,
+                            buyer_menu as buyer)
+import projekat.repository as repo
 
 def main():
+    logged_username = ''
     status = "unregistered"
     while True:
         if status == 'unregistered':
-            if not unregistered.unregistered_menu_main():
+            logged_username = unregistered.unregistered_menu_main()
+            status = repo.users[logged_username]["position"]
+            if not status:
                 break
-        # if status == 'registered':
+        if status == 'buyer':
+            status = buyer.buyer_menu_main(logged_username)
+            if not status:
+                break
 
 
 

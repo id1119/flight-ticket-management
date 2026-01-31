@@ -1,9 +1,11 @@
-import repository as repo
-import inputs as iu
+import projekat.repository as repo
+import projekat.inputs as iu
 import copy
-from main import *
+from projekat.main import *
 
-def universal_menu():
+concrete_flights_copy = {}
+
+def unregistered_menu():
     print("====MENU====")
     print("1) Login")
     print("2) Exit application")
@@ -12,6 +14,7 @@ def universal_menu():
     print("5) Search flight by multiple parameters")
     print("6) View 10 cheapest flights between two destinations")
     print("7) View flights at certain date +- flexible days")
+    print("9) Logout")
 
 def search_flight_by_menu():
     print("===Search flight by===")
@@ -35,19 +38,18 @@ def search_flight_by_multiple_menu():
     print("7) Airline")
     print("s) Search!!!")
     print("x) Go back to main menu")
-
-
-def universal_menu_main():
+def registered_menu_main():
     repo.load_all()
     while True:
-        print(universal_menu())
+        print(unregistered_menu())
         choice = input("Please choose functionality: ")
         if choice == '1':  # login
-            iu.login()  # vraca poziciju ulogovanog
+            status = iu.login()  # vraca poziciju ulogovanog
+            return status
         elif choice == '2':
             print("Exiting...")
             repo.save_all()
-            break
+            return False
         elif choice == '3':
             repo.available_flights()
         elif choice == '4':
@@ -149,3 +151,9 @@ def universal_menu_main():
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
+        elif choice == '9':
+            return "unregistered"
+        else:
+            print("[ERROR] Invalid input! Please try again.")
+# if __name__ == '__main__':
+    # unregistered_menu_main()

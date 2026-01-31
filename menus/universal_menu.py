@@ -1,6 +1,9 @@
-from main import *
+import projekat.repository as repo
+import projekat.inputs as iu
+import copy
+from projekat.main import *
 
-def unregistered_menu():
+def universal_menu():
     print("====MENU====")
     print("1) Login")
     print("2) Exit application")
@@ -9,7 +12,6 @@ def unregistered_menu():
     print("5) Search flight by multiple parameters")
     print("6) View 10 cheapest flights between two destinations")
     print("7) View flights at certain date +- flexible days")
-    print("8) Register")
 
 def search_flight_by_menu():
     print("===Search flight by===")
@@ -33,18 +35,19 @@ def search_flight_by_multiple_menu():
     print("7) Airline")
     print("s) Search!!!")
     print("x) Go back to main menu")
-def unregistered_menu_main():
+
+
+def universal_menu_main():
     repo.load_all()
     while True:
-        print(unregistered_menu())
+        print(universal_menu())
         choice = input("Please choose functionality: ")
         if choice == '1':  # login
-            status = iu.login()  # vraca poziciju ulogovanog
-            return status
+            iu.login()  # vraca poziciju ulogovanog
         elif choice == '2':
             print("Exiting...")
             repo.save_all()
-            return False
+            break
         elif choice == '3':
             repo.available_flights()
         elif choice == '4':
@@ -146,30 +149,3 @@ def unregistered_menu_main():
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
-        elif choice == '8':
-            username = iu.enter_name("username")
-            password = iu.enter_name("password")
-            name = iu.enter_name("name")
-            last_name = iu.enter_name("last name")
-            phone_number = iu.enter_name("phone number")
-            email = iu.enter_email()
-            position = "buyer"
-            passport_number = iu.enter_passport()
-            citizenship = iu.enter_optional("citizenship")
-            gender = iu.enter_optional("gender")
-            repo.users[username] = {
-                "username" : username,
-                "password" : password,
-                "name" : name,
-                "last_name" : last_name,
-                "phone_number": phone_number,
-                "email": email,
-                "position" : position,
-                "passport_number" : passport_number,
-                "citizenship" : citizenship,
-                "gender" : gender,
-            }
-        else:
-            print("[ERROR] Invalid input! Please try again.")
-if __name__ == '__main__':
-    unregistered_menu_main()

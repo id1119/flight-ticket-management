@@ -1,5 +1,6 @@
-import repository as repo
+import projekat.repository as repo
 import datetime
+import projekat.menus.buyer_menu as buyer
 
 def login():
     while True:
@@ -7,7 +8,7 @@ def login():
         password = input("Enter your password: ")
         try:
             if repo.users[username]["password"] == password:
-                return repo.users[username]["position"]
+                return username
         except Exception:
             print("[ERROR] Invalid credentials! Please try again.")
 
@@ -52,3 +53,26 @@ def enter_optional(type):
             return None
         else:
             return optional
+
+def enter_concrete_flight_number(concrete_flights):
+    while True:
+
+        concrete_flight_number = input("Enter concrete flight number: ")
+
+        if is_concrete_flight_number_valid(concrete_flight_number):
+            if int(repo.has_free_seats(concrete_flight_number)) >= 0:
+                return concrete_flight_number
+            else:
+                print("[ERROR] Flight is already fully booked!")
+        else:
+            pass
+
+def is_concrete_flight_number_valid(concrete_flight_number):
+    while True:
+        try:
+            _ = repo.concrete_flights[concrete_flight_number]
+            return True
+        except Exception:
+            print("[ERROR] Invalid concrete flight number")
+            return False
+
