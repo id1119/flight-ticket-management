@@ -17,6 +17,7 @@ def buyer_menu():
     print("9) Logout")
     print("10) Buy ticket")
     print("11) View bought tickets")
+    print("12) Ticket check-in")
 
 
 
@@ -254,6 +255,9 @@ def buyer_menu_main(logged_username):
                 print("[ERROR] Invalid input! Please try again.")
         elif choice == '11':
             repo.print_available_tickets_for_user(logged_username)
+        elif choice == '12':
+            ticket_number = iu.enter_ticket_number()
+            repo.is_ticket_ready_for_checkin(ticket_number, logged_username)
         else:
             print("[ERROR] Invalid input! Please try again.")
 if __name__ == '__main__':

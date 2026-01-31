@@ -30,7 +30,7 @@ def enter_email():
         except:
             print(f"[ERROR] Invalid email, please try again.")
 
-def enter_passport():
+def enter_passport_optional():
     while True:
         print("To skip click x")
         passport_number = input("Enter passport number(9 numbers):")
@@ -42,6 +42,17 @@ def enter_passport():
             print(f"[ERROR] Invalid passport number, please try again.")
         else:
             return passport_number
+
+def enter_passport():
+    while True:
+        passport_number = input("Enter passport number(9 numbers):")
+        if passport_number == '':
+            print(f"[ERROR] Invalid passport number, please try again.")
+        elif len(passport_number) != 9:
+            print(f"[ERROR] Invalid passport number, please try again.")
+        else:
+            return passport_number
+
 
 def enter_optional(type):
     while True:
@@ -76,4 +87,13 @@ def is_concrete_flight_number_valid(concrete_flight_number):
         except Exception:
             print("[ERROR] Invalid concrete flight number")
             return False
+
+def enter_ticket_number():
+    while True:
+        ticket_number = input("Enter ticket number for check-in: ")
+        try:
+            _ = repo.tickets[ticket_number]
+            return ticket_number
+        except Exception:
+            print("[ERROR] Invalid ticket number")
 

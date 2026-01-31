@@ -1,5 +1,5 @@
 concrete_flight_number,flight_number,departure_airport,arrival_airport,departure_date,arrival_date,departure_time,arrival_time,next_day_arrival,airline,airplane_model,price
-1001,JU01,BEG,CDG,03.02.2026,03.02.2026,08:30,10:45,no,Air Serbia,A320,120
+1001,JU01,BEG,CDG,01.02.2026,03.02.2026,08:30,10:45,no,Air Serbia,A320,120
 1002,JU01,BEG,CDG,14.02.2026,14.02.2026,08:30,10:45,no,Air Serbia,A320,120
 1003,JU01,BEG,CDG,01.03.2026,01.03.2026,08:30,10:45,no,Air Serbia,A320,120
 1004,JU02,BEG,FCO,05.02.2026,05.02.2026,09:15,11:30,no,Air Serbia,A320,140

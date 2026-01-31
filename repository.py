@@ -1,5 +1,6 @@
 import datetime
 import csv
+import inputs as iu
 
 users = {}
 flights = {}
@@ -113,7 +114,7 @@ def save_all():
             writer.writerow(row)
 
     tickets_fields = [
-        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat"
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat"
     ]
     with open("csv_files/tickets.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=tickets_fields)
@@ -254,6 +255,30 @@ def print_available_tickets_for_user(logged_username):
     for ticket_number, values in tickets.items():
         if tickets[ticket_number]["buyer_username"] == logged_username:
             print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^22} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^19} | {values[tickets_fields[5]]:^15}")
+
+def is_ticket_ready_for_checkin(ticket_number, logged_username):
+    concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+    departure_date = concrete_flights[concrete_flight_number]["departure_date"]
+    departure_time = concrete_flights[concrete_flight_number]["departure_time"]
+
+    departure_dt = datetime.datetime.strptime(
+        departure_date + " " + departure_time,
+        "%d.%m.%Y %H:%M"
+    )
+    current_dt = datetime.datetime.today()
+    current_dt_min = departure_dt - datetime.timedelta(hours=48)
+    if current_dt_min<=current_dt<=departure_dt:
+        if users[logged_username]["passport_number"] == "":
+            users[logged_username]["passport_number"] = iu.enter_passport()
+        if users[logged_username]["citizenship"] == "":
+            users[logged_username]["citizenship"] = iu.enter_name("citizenship")
+        if users[logged_username]["gender"] == "":
+            users[logged_username]["gender"] = iu.enter_name("gender")
+        tickets[ticket_number]["check_in"] = "yes"
+        print("Successful check-in!")
+
+    else:
+        print("[ERROR] Check-out can only be done 48 hours before flight")
 
 
 if __name__ == '__main__':

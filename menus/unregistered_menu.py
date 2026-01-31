@@ -160,7 +160,7 @@ def unregistered_menu_main():
             phone_number = iu.enter_name("phone number")
             email = iu.enter_email()
             position = "buyer"
-            passport_number = iu.enter_passport()
+            passport_number = iu.enter_passport_optional()
             citizenship = iu.enter_optional("citizenship")
             gender = iu.enter_optional("gender")
             repo.users[username] = {
