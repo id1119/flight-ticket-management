@@ -56,9 +56,10 @@ def enter_optional(type):
 
 def enter_concrete_flight_number(concrete_flights):
     while True:
-
+        print("x) Go back")
         concrete_flight_number = input("Enter concrete flight number: ")
-
+        if concrete_flight_number == 'x':
+            return
         if is_concrete_flight_number_valid(concrete_flight_number):
             if int(repo.has_free_seats(concrete_flight_number)) >= 0:
                 return concrete_flight_number

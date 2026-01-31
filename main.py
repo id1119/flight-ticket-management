@@ -8,6 +8,8 @@ def main():
     while True:
         if status == 'unregistered':
             logged_username = unregistered.unregistered_menu_main()
+            if not logged_username:
+                break
             status = repo.users[logged_username]["position"]
             if not status:
                 break

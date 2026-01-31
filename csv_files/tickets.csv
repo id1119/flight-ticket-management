@@ -99,3 +99,5 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 098,1048,ivan,Vladan,Jovanovic,48B
 099,1049,mika,Mika,Mikic,49A
 100,1050,mika,Branko,Mikic,49B
+101,1001,buyer,buyer,buyer,
+102,1015,buyer,buyer,buyer,

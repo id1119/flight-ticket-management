@@ -83,7 +83,7 @@ def save_all():
 
     concrete_flights_fields = [
         "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price", "has_free_seats"
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
     ]
     with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
@@ -118,14 +118,14 @@ def save_all():
     with open("csv_files/tickets.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=tickets_fields)
         writer.writeheader()
-        for ticket, values in tickets.items():
-            row = {"ticket": ticket, **values}
+        for ticket_number, values in tickets.items():
+            row = {"ticket_number": ticket_number, **values}
             writer.writerow(row)
 
 concrete_flights_fields = [
         "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date",
         "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
+        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price", "has_free_seats"
     ]
 
 def concrete_flights_print_header():
@@ -233,10 +233,10 @@ def print_by_dt_min_max(concrete_flights_copy, arrival_dt, arrival_dt_max):
     concrete_flights_print_header()
 
     for concrete_flight_number, values in concrete_flights_copy.items():
-        arrival_date = concrete_flights_copy[concrete_flight_number]["arrival_date"]
-        arrival_time = concrete_flights_copy[concrete_flight_number]["arrival_time"]
+        departure_date = concrete_flights_copy[concrete_flight_number]["departure_date"]
+        departure_time = concrete_flights_copy[concrete_flight_number]["departure_time"]
         current_dt = datetime.datetime.strptime(
-            arrival_date + " " + arrival_time,
+            departure_date + " " + departure_time,
             "%d.%m.%Y %H:%M"
         )
 
@@ -244,7 +244,18 @@ def print_by_dt_min_max(concrete_flights_copy, arrival_dt, arrival_dt_max):
             print(
                 f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} | {values[concrete_flights_fields[4]]:^15} | {values[concrete_flights_fields[5]]:^15} | {values[concrete_flights_fields[6]]:^15} | {values[concrete_flights_fields[7]]:^15} | {values[concrete_flights_fields[8]]:^16} | {values[concrete_flights_fields[9]]:^24} | {values[concrete_flights_fields[10]]:^15} | {values[concrete_flights_fields[11]]:^15}")
 
+def print_available_tickets_for_user(logged_username):
+    tickets_fields = [
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat"
+    ]
+    print()
+    print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^15} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^15} | {tickets_fields[5]:^12}")
+    print("-" * 111)
+    for ticket_number, values in tickets.items():
+        if tickets[ticket_number]["buyer_username"] == logged_username:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^22} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^19} | {values[tickets_fields[5]]:^15}")
+
 
 if __name__ == '__main__':
     load_all()
-    generate_ticket_number()
+    # print(print_available_tickets_for_user())

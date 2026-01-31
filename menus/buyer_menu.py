@@ -16,6 +16,8 @@ def buyer_menu():
     print("7) View flights at certain date +- flexible days")
     print("9) Logout")
     print("10) Buy ticket")
+    print("11) View bought tickets")
+
 
 
 def search_flight_by_menu():
@@ -171,82 +173,87 @@ def buyer_menu_main(logged_username):
                     repo.search_by_multiple(concrete_flights_copy, "arrival_airport", arrival_airport)
                     repo.print_search_by_multiple(concrete_flights_copy)
                 elif choose == '2':
-                    concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
-                    print("==Are you buying ticket for yourself?==")
-                    print("1) Yes!")
-                    print("2) No!")
-                    print("x) Go back")
-                    choose1 = input("Enter answer: ")
-                    if choose1 == '1':
-                        ticket_number = repo.generate_ticket_number()
-                        name = repo.users[logged_username]["name"]
-                        last_name = repo.users[logged_username]["last_name"]
-                        repo.tickets[ticket_number]={
-                            "concrete_flight_number":concrete_flight_number,
-                            "buyer_username": logged_username,
-                            "name":name,
-                            "last_name":last_name
-                        }
-                        print("===Continue===")
-                        print("1) Buy new ticket connected to current flight")
+                    while True:
+                        concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
+                        print("==Are you buying ticket for yourself?==")
+                        print("1) Yes!")
+                        print("2) No!")
                         print("x) Go back")
-                        choose2= input("Enter option: ")
-                        if choose2 == '1':
-                            concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
-                            arrival_airport = repo.concrete_flights[concrete_flight_number]["arrival_airport"]
-                            repo.search_by_multiple(concrete_flights_copy, "departure_airport", arrival_airport)
-                            arrival_date = repo.concrete_flights[concrete_flight_number]["arrival_date"]
-                            arrival_time = repo.concrete_flights[concrete_flight_number]["arrival_time"]
-
-                            arrival_dt = datetime.datetime.strptime(
-                                arrival_date + " " + arrival_time,
-                                "%d.%m.%Y %H:%M"
-                            )
-
-                            arrival_dt_max = arrival_dt + datetime.timedelta(minutes=120)
-
-                            repo.print_by_dt_min_max(concrete_flights_copy ,arrival_dt, arrival_dt_max)
-                        elif choose2 == 'x':
-                            break
-                        else:
-                            print("[ERROR] Invalid input! Please try again.")
-                    elif choose1 == '2':
-                        ticket_number = repo.generate_ticket_number()
-                        name = iu.enter_name("passenger name")
-                        last_name = iu.enter_name("passenger last name")
-                        repo.tickets[ticket_number]={
-                            "concrete_flight_number":concrete_flight_number,
-                            "buyer_username": logged_username,
-                            "name":name,
-                            "last_name":last_name
-                        }
-                        while True:
+                        choose1 = input("Enter answer: ")
+                        if choose1 == '1':
+                            ticket_number = repo.generate_ticket_number()
+                            name = repo.users[logged_username]["name"]
+                            last_name = repo.users[logged_username]["last_name"]
+                            repo.tickets[ticket_number]={
+                                "concrete_flight_number":concrete_flight_number,
+                                "buyer_username": logged_username,
+                                "passenger_name":name,
+                                "passenger_last_name":last_name
+                            }
                             print("===Continue===")
-                            print("1) Buy ticket for same flight for new passenger")
+                            print("1) Buy new ticket connected to current flight")
                             print("x) Go back")
                             choose2= input("Enter option: ")
                             if choose2 == '1':
-                                ticket_number = repo.generate_ticket_number()
-                                name = iu.enter_name("passenger name")
-                                last_name = iu.enter_name("passenger last name")
-                                repo.tickets[ticket_number]={
-                                "concrete_flight_number":concrete_flight_number,
-                                "buyer_username": logged_username,
-                                "name":name,
-                                "last_name":last_name
-                            }
+                                concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+                                arrival_airport = repo.concrete_flights[concrete_flight_number]["arrival_airport"]
+                                repo.search_by_multiple(concrete_flights_copy, "departure_airport", arrival_airport)
+                                arrival_date = repo.concrete_flights[concrete_flight_number]["arrival_date"]
+                                arrival_time = repo.concrete_flights[concrete_flight_number]["arrival_time"]
+
+                                arrival_dt = datetime.datetime.strptime(
+                                    arrival_date + " " + arrival_time,
+                                    "%d.%m.%Y %H:%M"
+                                )
+
+                                arrival_dt_max = arrival_dt + datetime.timedelta(minutes=120)
+
+                                repo.print_by_dt_min_max(concrete_flights_copy ,arrival_dt, arrival_dt_max)
                             elif choose2 == 'x':
                                 break
                             else:
                                 print("[ERROR] Invalid input! Please try again.")
-                    elif choose == 'x':
-                        break
-                    else:
-                        print("[ERROR] Invalid input! Please try again.")
+                        elif choose1 == '2':
+                            ticket_number = repo.generate_ticket_number()
+                            name = iu.enter_name("passenger name")
+                            last_name = iu.enter_name("passenger last name")
+                            repo.tickets[ticket_number]={
+                                "concrete_flight_number":concrete_flight_number,
+                                "buyer_username": logged_username,
+                                "passenger_name":name,
+                                "passenger_last_name":last_name
+                            }
+                            while True:
+                                print("===Continue===")
+                                print("1) Buy ticket for same flight for new passenger")
+                                print("x) Go back")
+                                choose2= input("Enter option: ")
+                                if choose2 == '1':
+                                    ticket_number = repo.generate_ticket_number()
+                                    name = iu.enter_name("passenger name")
+                                    last_name = iu.enter_name("passenger last name")
+                                    repo.tickets[ticket_number]={
+                                    "concrete_flight_number":concrete_flight_number,
+                                    "buyer_username": logged_username,
+                                    "passenger_name":name,
+                                    "passenger_last_name":last_name
+                                }
+                                elif choose2 == 'x':
+                                    break
+                                else:
+                                    print("[ERROR] Invalid input! Please try again.")
+                        elif choose1 == "x":
+                            break
+                        else:
+                            print("[ERROR] Invalid input! Please try again.")
                 elif choose == 'x':
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
+            else:
+                print("[ERROR] Invalid input! Please try again.")
+        elif choice == '11':
+            repo.print_available_tickets_for_user(logged_username)
         else:
             print("[ERROR] Invalid input! Please try again.")
 if __name__ == '__main__':
