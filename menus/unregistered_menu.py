@@ -177,5 +177,6 @@ def unregistered_menu_main():
             }
         else:
             print("[ERROR] Invalid input! Please try again.")
+
 if __name__ == '__main__':
     unregistered_menu_main()
