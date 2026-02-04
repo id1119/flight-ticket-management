@@ -271,12 +271,6 @@ def generate_ticket_number():
     max_ticket+=1
     return max_ticket
 
-def view_connected_flights(flight_number):
-
-    arrival_date = concrete_flights[flight_number]["arrival_date"]
-    arrival_time = concrete_flights[flight_number]["arrival_time"]
-    date_time = datetime.datetime.strptime(arrival_date, arrival_time)
-
 def print_by_dt_min_max(flights_copy, concrete_flights_copy, arrival_dt, arrival_dt_max):
     global concrete_flights_fields
     global flights_fields
@@ -311,9 +305,12 @@ def print_available_tickets_for_user(logged_username):
             print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^22} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^19} | {values[tickets_fields[5]]:^15}")
 
 def is_ticket_ready_for_checkin(ticket_number, logged_username):
+
     concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+    flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+
     departure_date = concrete_flights[concrete_flight_number]["departure_date"]
-    departure_time = concrete_flights[concrete_flight_number]["departure_time"]
+    departure_time = flights[flight_number]["departure_time"]
 
     departure_dt = datetime.datetime.strptime(
         departure_date + " " + departure_time,
@@ -321,13 +318,17 @@ def is_ticket_ready_for_checkin(ticket_number, logged_username):
     )
     current_dt = datetime.datetime.today()
     current_dt_min = departure_dt - datetime.timedelta(hours=48)
+
     if current_dt_min<=current_dt<=departure_dt:
         if users[logged_username]["passport_number"] == "":
             users[logged_username]["passport_number"] = iu.enter_passport()
+
         if users[logged_username]["citizenship"] == "":
             users[logged_username]["citizenship"] = iu.enter_name("citizenship")
+
         if users[logged_username]["gender"] == "":
             users[logged_username]["gender"] = iu.enter_name("gender")
+
         tickets[ticket_number]["check_in"] = "yes"
         print("Successful check-in!")
 

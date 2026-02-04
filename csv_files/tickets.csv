@@ -2,7 +2,7 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 1,CF001,mmarkovic,Marko,Markovic,no,12A
 2,CF001,mmarkovic,Ana,Petrovic,no,12B
 3,CF002,njovanovic,Nikola,Jovanovic,yes,8C
-4,CF003,mnikolic,Milos,Nikolic,no,5A
+4,CF003,mnikolic,Milos,Nikolic,yes,5A
 5,CF004,jilic,Jelena,Ilic,yes,7D
 6,CF005,spavlovic,Sara,Pavlovic,no,3F
 7,CF006,lsimic,Luka,Simic,no,10B
