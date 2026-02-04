@@ -3,7 +3,7 @@ import projekat.inputs as iu
 import copy
 from projekat.main import *
 import datetime
-concrete_flights_copy = {}
+flights_copy = {}
 
 def buyer_menu():
     print("====MENU====")
@@ -52,7 +52,7 @@ def buy_ticket_menu():
 
 def buyer_menu_main(logged_username):
     repo.load_all()
-    global concrete_flights_copy
+    global flights_copy
     while True:
         print(buyer_menu())
         choice = input("Please choose functionality: ")
@@ -100,63 +100,63 @@ def buyer_menu_main(logged_username):
                 else:
                     print("[ERROR] Invalid input! Please try again.")
         elif choice == '5':
-            concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+            flights_copy = copy.deepcopy(repo.concrete_flights)
             while True:
                 search_flight_by_multiple_menu()
                 choose = input("Select one of parameters that you want to search by: ")
                 if choose == '1':
                     parameter = "departure_airport"
                     value = input("Enter departure airport: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '2':
                     parameter = "arrival_airport"
                     value = input("Enter arrival airport: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '3':
                     parameter = "departure_date"
                     value = input("Enter departure date: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '4':
                     parameter = "arrival_date"
                     value = input("Enter arrival date: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '5':
                     parameter = "departure_time"
                     value = input("Enter departure time: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '6':
                     parameter = "arrival_time"
                     value = input("Enter arrival time: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == '7':
                     parameter = "airline"
                     value = input("Enter airline: ")
-                    repo.search_by_multiple(concrete_flights_copy, parameter, value)
+                    repo.search_by_multiple(flights_copy, parameter, value)
                 elif choose == 's':
-                    repo.print_search_by_multiple(concrete_flights_copy)
+                    repo.print_search_by_multiple(flights_copy)
                 elif choose == 'x':
                     print("Going back..")
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
         elif choice == '6':
-            concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+            flights_copy = copy.deepcopy(repo.concrete_flights)
             departure_airport = input("Enter departure airport: ")
-            repo.search_by_multiple(concrete_flights_copy, "departure_airport", departure_airport)
+            repo.search_by_multiple(flights_copy, "departure_airport", departure_airport)
             arrival_airport = input("Enter arrival airport: ")
-            repo.search_by_multiple(concrete_flights_copy, "arrival_airport", arrival_airport)
-            repo.print_ten_cheapest_flights(concrete_flights_copy)
+            repo.search_by_multiple(flights_copy, "arrival_airport", arrival_airport)
+            repo.print_ten_cheapest_flights(flights_copy)
         elif choice == '7':
             while True:
-                concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+                flights_copy = copy.deepcopy(repo.concrete_flights)
                 departure_airport = input("Enter departure airport: ")
-                repo.search_by_multiple(concrete_flights_copy, "departure_airport", departure_airport)
+                repo.search_by_multiple(flights_copy, "departure_airport", departure_airport)
                 arrival_airport = input("Enter arrival airport: ")
-                repo.search_by_multiple(concrete_flights_copy, "arrival_airport", arrival_airport)
+                repo.search_by_multiple(flights_copy, "arrival_airport", arrival_airport)
                 date = input("Enter date of flight: ")
                 days = input("Enter number of flexible days: ")
                 try:
-                    repo.print_flights_by_search_date(concrete_flights_copy, date, days)
+                    repo.print_flights_by_search_date(flights_copy, date, days)
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
@@ -167,12 +167,12 @@ def buyer_menu_main(logged_username):
                 buy_ticket_menu()
                 choose = input("Enter option: ")
                 if choose =='1':
-                    concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+                    flights_copy = copy.deepcopy(repo.concrete_flights)
                     departure_airport = input("Enter departure airport: ")
-                    repo.search_by_multiple(concrete_flights_copy, "departure_airport", departure_airport)
+                    repo.search_by_multiple(flights_copy, "departure_airport", departure_airport)
                     arrival_airport = input("Enter arrival airport: ")
-                    repo.search_by_multiple(concrete_flights_copy, "arrival_airport", arrival_airport)
-                    repo.print_search_by_multiple(concrete_flights_copy)
+                    repo.search_by_multiple(flights_copy, "arrival_airport", arrival_airport)
+                    repo.print_search_by_multiple(flights_copy)
                 elif choose == '2':
                     while True:
                         concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
@@ -196,20 +196,20 @@ def buyer_menu_main(logged_username):
                             print("x) Go back")
                             choose2= input("Enter option: ")
                             if choose2 == '1':
-                                concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
+                                flights_copy = copy.deepcopy(repo.concrete_flights)
                                 arrival_airport = repo.concrete_flights[concrete_flight_number]["arrival_airport"]
-                                repo.search_by_multiple(concrete_flights_copy, "departure_airport", arrival_airport)
+                                repo.search_by_multiple(flights_copy, "departure_airport", arrival_airport)
                                 arrival_date = repo.concrete_flights[concrete_flight_number]["arrival_date"]
                                 arrival_time = repo.concrete_flights[concrete_flight_number]["arrival_time"]
 
                                 arrival_dt = datetime.datetime.strptime(
                                     arrival_date + " " + arrival_time,
-                                    "%d.%m.%Y %H:%M"
+                                    "%d.%m.%Y. %H:%M"
                                 )
 
                                 arrival_dt_max = arrival_dt + datetime.timedelta(minutes=120)
 
-                                repo.print_by_dt_min_max(concrete_flights_copy ,arrival_dt, arrival_dt_max)
+                                repo.print_by_dt_min_max(flights_copy ,arrival_dt, arrival_dt_max)
                             elif choose2 == 'x':
                                 break
                             else:
