@@ -201,7 +201,8 @@ def buyer_menu_main(logged_username):
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
                                 "passenger_name":name,
-                                "passenger_last_name":last_name
+                                "passenger_last_name":last_name,
+                                "check_in":"no"
                             }
                             print("===Continue===")
                             print("1) Buy new ticket connected to current flight")
@@ -236,11 +237,13 @@ def buyer_menu_main(logged_username):
                             name = iu.enter_name("passenger name")
                             last_name = iu.enter_name("passenger last name")
                             repo.tickets[ticket_number]={
-                                "ticket_number":ticket_number,
+                                # "ticket_number":ticket_number,
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
                                 "passenger_name":name,
-                                "passenger_last_name":last_name
+                                "passenger_last_name":last_name,
+                                "check_in":"no"
+
                             }
                             while True:
                                 print("===Continue===")
@@ -255,8 +258,9 @@ def buyer_menu_main(logged_username):
                                     "concrete_flight_number":concrete_flight_number,
                                     "buyer_username": logged_username,
                                     "passenger_name":name,
-                                    "passenger_last_name":last_name
-                                }
+                                    "passenger_last_name":last_name,
+                                        "check_in": "no"
+                                    }
                                 elif choose2 == 'x':
                                     break
                                 else:
@@ -274,8 +278,15 @@ def buyer_menu_main(logged_username):
         elif choice == '11':
             repo.print_available_tickets_for_user(logged_username)
         elif choice == '12':
-            ticket_number = iu.enter_ticket_number()
-            repo.is_ticket_ready_for_checkin(ticket_number, logged_username)
+            ticket_number = iu.enter_ticket_number()        #unosi broj karte
+
+            if not repo.is_ticket_ready_for_checkin(ticket_number, logged_username): #provera da li je spremno za cekiranje
+                continue
+            taken_seats = repo.get_taken_seats(ticket_number)    #pravi skup zauzetih mesta
+
+            rows = repo.print_taken_seats(taken_seats, ticket_number)   #ispisuje sva zauzeta sedista i vraca broj redova
+
+            repo.tickets[ticket_number]["seat"] = iu.enter_seat(taken_seats, rows)      #unos sedista
         else:
             print("[ERROR] Invalid input! Please try again.")
 if __name__ == '__main__':

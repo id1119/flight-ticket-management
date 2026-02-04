@@ -97,3 +97,19 @@ def enter_ticket_number():
         except Exception:
             print("[ERROR] Invalid ticket number")
 
+def enter_seat(taken_seats, rows):
+    while True:
+        seat_number = (input("Enter seat (row:seat): ")).upper()
+        try:
+            row, seat = seat_number.split(":")
+            if row.isdigit() and 0 < int(row) <= rows and seat.isalpha():
+                if seat_number in taken_seats:
+                    print("This seat is already taken, please choose other seat.")
+                    continue
+                else:
+                    seat_number = seat_number.replace(":", "")
+                    return seat_number
+            else:
+                print("[ERROR] Invalid seat number! Please try again.")
+        except Exception:
+            print("[ERROR] Invalid seat number! Please try again.")

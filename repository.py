@@ -292,7 +292,6 @@ def print_by_dt_min_max(flights_copy, concrete_flights_copy, arrival_dt, arrival
             print(
                 f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} ")
 
-
 def print_available_tickets_for_user(logged_username):
     tickets_fields = [
         "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat"
@@ -316,7 +315,7 @@ def is_ticket_ready_for_checkin(ticket_number, logged_username):
         departure_date + " " + departure_time,
         "%d.%m.%Y. %H:%M"
     )
-    current_dt = datetime.datetime.today()
+    current_dt = datetime.datetime.today()  #.replace(hour=0, minute=0, second=0, microsecond=0)
     current_dt_min = departure_dt - datetime.timedelta(hours=48)
 
     if current_dt_min<=current_dt<=departure_dt:
@@ -331,10 +330,47 @@ def is_ticket_ready_for_checkin(ticket_number, logged_username):
 
         tickets[ticket_number]["check_in"] = "yes"
         print("Successful check-in!")
+        return True
 
     else:
         print("[ERROR] Check-out can only be done 48 hours before flight")
+        return False
+def get_taken_seats(ticket_number):
 
+    concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+
+    taken_seats = set()           #skup
+
+    for ticket, values in tickets.items():
+        if values["concrete_flight_number"] == concrete_flight_number and values["seat"] != '':
+            taken_seats.add(tickets[ticket_number]["seat"])
+
+    return taken_seats
+
+def print_taken_seats(taken_seats, ticket_number):
+    concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+
+    flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+
+    airplane_model = flights[flight_number]["airplane_model"]
+
+    rows = int(airplane_models[airplane_model]["rows"])
+
+    seats = airplane_models[airplane_model]["seats"].split("|")
+
+    for row in range(1, rows+1):
+        print(f"row {row}: ", end="")
+
+        for seat in seats:
+
+            seat_code = f"{row}{seat}"
+
+            if seat_code in taken_seats:
+                print("X ", end="")
+            else:
+                print(f"{seat} ", end="")
+        print()
+    return rows
 
 if __name__ == '__main__':
     load_all()
