@@ -99,3 +99,6 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 98,CF097,mlazic2,Marija,Lazic,no,10A
 99,CF098,oradic2,Ognjen,Radic,no,11B
 100,CF099,sjovanovic2,Sanja,Jovanovic,no,12C
+101,CF006,buyer,buyer,buyer,,
+104,CF006,buyer,buyer,buyer,,
+105,CF030,buyer,Dragan,Draganovic,,

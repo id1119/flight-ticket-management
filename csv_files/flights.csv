@@ -4,7 +4,7 @@ JU02,BEG,FCO,09:15,11:30,no,Air Serbia,Tue|Thu|Sat,A320,140
 JU03,BEG,FRA,07:00,09:00,no,Air Serbia,Mon|Tue|Wed|Thu|Fri,A319,110
 JU04,BEG,AMS,06:45,09:10,no,Air Serbia,Mon|Thu,A320,150
 JU05,BEG,ATH,14:20,16:00,no,Air Serbia,Wed|Sun,A319,100
-AF20,CDG,BEG,16:40,19:00,no,Air France,Mon|Thu|Sun,A320,170
+AF20,CDG,BEG,12:00,14:20,no,Air France,Mon|Thu|Sun,A320,170
 AF21,CDG,FCO,07:10,09:20,no,Air France,Tue|Sat,A320,165
 AF22,CDG,AMS,18:00,19:10,no,Air France,Mon|Fri,A319,145
 TK30,IST,BEG,09:00,10:30,no,Turkish Airlines,Mon|Wed|Fri,A321,130
