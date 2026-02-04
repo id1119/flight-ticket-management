@@ -83,8 +83,7 @@ def save_all():
             writer.writerow(row)
 
     concrete_flights_fields = [
-        "concrete_flight_number","flight_number", "departure_airport", "arrival_airport", "departure_date", "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price"
+        "concrete_flight_number","flight_number", "departure_date", "arrival_date",
     ]
     with open("csv_files/concrete_flights.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=concrete_flights_fields)
@@ -123,11 +122,15 @@ def save_all():
             row = {"ticket_number": ticket_number, **values}
             writer.writerow(row)
 
+
 concrete_flights_fields = [
-        "concrete_flight_number", "flight_number", "departure_airport", "arrival_airport", "departure_date",
-        "arrival_date",
-        "departure_time", "arrival_time", "next_day_arrival", "airline", "airplane_model", "price", "has_free_seats"
-    ]
+    "concrete_flight_number", "flight_number", "departure_date", "arrival_date",
+]
+
+flights_fields = [
+    "flight_number", "departure_airport", "arrival_airport", "departure_time",
+    "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
+]
 
 def concrete_flights_print_header():
     global concrete_flights_fields
