@@ -57,7 +57,7 @@ def enter_passport():
 def enter_optional(type):
     while True:
         print("To skip click x")
-        optional = input(f"Enter {type}")
+        optional = input(f"Enter {type}: ")
         if optional == "":
             print(f"[ERROR] Invalid passport number, please try again.")
         elif optional == 'x':
@@ -91,6 +91,8 @@ def is_concrete_flight_number_valid(concrete_flight_number):
 def enter_ticket_number():
     while True:
         ticket_number = input("Enter ticket number: ")
+        if ticket_number == 'x':
+            return False
         try:
             _ = repo.tickets[ticket_number]
             return ticket_number
@@ -113,3 +115,44 @@ def enter_seat(taken_seats, rows):
                 print("[ERROR] Invalid seat number! Please try again.")
         except Exception:
             print("[ERROR] Invalid seat number! Please try again.")
+
+def enter_next_day_arrival():
+    while True:
+        next_day_arrival = input("Does flight arrive next day? (yes/no): ")
+        if next_day_arrival == "no" or next_day_arrival == "yes":
+            return next_day_arrival
+        print("[ERROR] Invalid input! Please try again.")
+
+def enter_days_of_flight():
+    valid_days = {"mon", "tue", "wed", "thu", "fri", "sat", "sun"}
+
+    while True:
+        days_of_flight = input("enter days of flight (day|day|day): ").lower()
+        list_of_days = days_of_flight.split("|")
+
+        all_valid = True
+
+        for day in list_of_days:
+            if day not in valid_days:
+                all_valid = False
+                break
+
+        if all_valid:
+            return days_of_flight
+
+        else:
+            print("[ERROR] Invalid input! Please try again.")
+
+def enter_airplane_model():
+    while True:
+        airplane_model = input("Enter airplane model: ")
+        if airplane_model == "A320" or airplane_model == "B737":
+            return airplane_model
+        print("[ERROR] Invalid airplane model! Please try again.")
+
+def enter_price():
+    while True:
+        price = input("Enter price: ")
+        if price != "" and price.isdigit() and int(price) > 0:
+            return price
+        print("[ERROR] Invalid price! Please try again.")

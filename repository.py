@@ -430,6 +430,29 @@ def search_ticket_by_name(passenger_name, passenger_last_name):
         if tickets[ticket_number]["passenger_name"] == passenger_name and tickets[ticket_number]["passenger_last_name"] == passenger_last_name:
             print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
 
+def print_deletable_tickets(deletable_tickets):
+    global tickets_fields
+
+    tickets_print_header()
+
+    for ticket_number, values in tickets.items():
+        if tickets[ticket_number]["deleted"] == "yes":
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+        else:
+            del deletable_tickets[ticket_number]
+    return deletable_tickets
+
+def delete_all_deletable_tickets(deletable_tickets):
+    for ticket_number, values in list(tickets.items()):
+        if ticket_number in deletable_tickets:
+            del deletable_tickets[ticket_number]
+            del tickets[ticket_number]
+
+def delete_deletable_flight(deletable_tickets, ticket_number_for_deletion):
+    for ticket_number, values in list(tickets.items()):
+        if ticket_number in deletable_tickets and ticket_number == ticket_number_for_deletion:
+            del tickets[ticket_number]
+            del deletable_tickets[ticket_number]
 if __name__ == '__main__':
     load_all()
     # print(print_available_tickets_for_user())
