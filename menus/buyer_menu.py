@@ -19,8 +19,6 @@ def buyer_menu():
     print("11) View bought tickets")
     print("12) Ticket check-in")
 
-
-
 def search_flight_by_menu():
     print("===Search flight by===")
     print("1) Departure airport")
@@ -188,6 +186,11 @@ def buyer_menu_main(logged_username):
                 elif choose == '2':
                     while True:
                         concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
+                        if concrete_flight_number == 'x':
+                            break
+                        if not repo.has_free_seats(concrete_flight_number):
+                            print("No available seats in this concrete flight, please try again.")
+                            continue
                         print("==Are you buying ticket for yourself?==")
                         print("1) Yes!")
                         print("2) No!")

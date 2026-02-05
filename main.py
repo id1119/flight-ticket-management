@@ -1,5 +1,6 @@
 from projekat.menus import (unregistered_menu as unregistered,
-                            buyer_menu as buyer)
+                            buyer_menu as buyer,
+                            seller_menu as seller)
 import projekat.repository as repo
 
 def main():
@@ -15,6 +16,10 @@ def main():
                 break
         if status == 'buyer':
             status = buyer.buyer_menu_main(logged_username)
+            if not status:
+                break
+        if status == 'seller':
+            status = seller.seller_menu_main(logged_username)
             if not status:
                 break
 

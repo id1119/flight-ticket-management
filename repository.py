@@ -259,10 +259,12 @@ def has_free_seats(concrete_flight_number):
     used_seats = 0
     for ticket, values in tickets.items():
         if tickets[ticket]["concrete_flight_number"] == concrete_flight_number:
-            used_seats+=1
+            used_seats = used_seats + 1
     free_seats = total_seats - used_seats
-    return free_seats
-
+    if free_seats > 0:
+        return free_seats
+    else:
+        return False
 def generate_ticket_number():
     max_ticket = 0
     for ticket in tickets.keys():
@@ -335,6 +337,7 @@ def is_ticket_ready_for_checkin(ticket_number, logged_username):
     else:
         print("[ERROR] Check-out can only be done 48 hours before flight")
         return False
+
 def get_taken_seats(ticket_number):
 
     concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
@@ -371,6 +374,7 @@ def print_taken_seats(taken_seats, ticket_number):
                 print(f"{seat} ", end="")
         print()
     return rows
+
 
 if __name__ == '__main__':
     load_all()
