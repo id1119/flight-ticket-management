@@ -3,7 +3,10 @@ import projekat.inputs as iu
 import copy
 from projekat.main import *
 import datetime
+from projekat.inputs import enter_name
+
 flights_copy = {}
+concrete_flights_copy = {}
 
 def buyer_menu():
     print("====MENU====")
@@ -109,31 +112,31 @@ def buyer_menu_main(logged_username):
                 choose = input("Select one of parameters that you want to search by: ")
                 if choose == '1':
                     parameter = "departure_airport"
-                    value = input("Enter departure airport: ")
+                    value = enter_name("departure airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '2':
                     parameter = "arrival_airport"
-                    value = input("Enter arrival airport: ")
+                    value = enter_name("arrival airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '3':
                     parameter = "departure_date"
-                    value = input("Enter departure date: ")
+                    value = enter_name("departure date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '4':
                     parameter = "arrival_date"
-                    value = input("Enter arrival date: ")
+                    value = enter_name("arrival date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '5':
                     parameter = "departure_time"
-                    value = input("Enter departure time: ")
+                    value = enter_name("departure time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '6':
                     parameter = "arrival_time"
-                    value = input("Enter arrival time: ")
+                    value = enter_name("arrival time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '7':
                     parameter = "airline"
-                    value = input("Enter airline: ")
+                    value = enter_name("airline")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == 's':
                     repo.print_search_by_multiple(flights_copy, concrete_flights_copy)
@@ -200,12 +203,16 @@ def buyer_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = repo.users[logged_username]["name"]
                             last_name = repo.users[logged_username]["last_name"]
+                            today = datetime.datetime.today()
                             repo.tickets[ticket_number]={
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
                                 "passenger_name":name,
                                 "passenger_last_name":last_name,
-                                "check_in":"no"
+                                "check_in":"no",
+                                "deleted":"no",
+                                "purchase_date":today,
+                                "seller_username":"online"
                             }
                             print("===Continue===")
                             print("1) Buy new ticket connected to current flight")
@@ -239,14 +246,17 @@ def buyer_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = iu.enter_name("passenger name")
                             last_name = iu.enter_name("passenger last name")
+                            today = datetime.datetime.today()
                             repo.tickets[ticket_number]={
                                 # "ticket_number":ticket_number,
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
                                 "passenger_name":name,
                                 "passenger_last_name":last_name,
-                                "check_in":"no"
-
+                                "check_in":"no",
+                                "deleted":"no",
+                                "purchase_date": today,
+                                "seller_username": "online"
                             }
                             while True:
                                 print("===Continue===")
@@ -257,12 +267,16 @@ def buyer_menu_main(logged_username):
                                     ticket_number = repo.generate_ticket_number()
                                     name = iu.enter_name("passenger name")
                                     last_name = iu.enter_name("passenger last name")
+                                    today = datetime.datetime.today()
                                     repo.tickets[ticket_number]={
                                     "concrete_flight_number":concrete_flight_number,
                                     "buyer_username": logged_username,
                                     "passenger_name":name,
                                     "passenger_last_name":last_name,
-                                        "check_in": "no"
+                                    "check_in": "no",
+                                    "deleted":"no",
+                                    "purchase_date": today,
+                                    "seller_username": "online"
                                     }
                                 elif choose2 == 'x':
                                     break

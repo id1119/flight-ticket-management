@@ -113,7 +113,7 @@ def save_all():
             writer.writerow(row)
 
     tickets_fields = [
-        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat", "deleted"
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat", "deleted", "purchase_date", "seller_username"
     ]
     with open("csv_files/tickets.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=tickets_fields)
@@ -132,8 +132,9 @@ flights_fields = [
 ]
 
 tickets_fields = [
-    "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat", "deleted"
-                  ]
+    "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in",
+    "seat", "deleted", "purchase_date", "seller_username"
+]
 
 def concrete_flights_print_header():
     global concrete_flights_fields
@@ -144,8 +145,8 @@ def concrete_flights_print_header():
 def tickets_print_header():
     global tickets_fields
     print()
-    print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^23} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^23} | {tickets_fields[5]:^16} | {tickets_fields[6]:^15} ")
-    print("-" * 140)
+    print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^23} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^23} | {tickets_fields[5]:^16} | {tickets_fields[6]:^15} | {tickets_fields[7]:^15} | {tickets_fields[8]:^15} | {tickets_fields[9]:^15} ")
+    print("-" * 197)
 
 def available_flights():
     today = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0) #today = današnji datum + trenutno vreme, zbog biblioteke mora ovako
@@ -437,7 +438,7 @@ def print_deletable_tickets(deletable_tickets):
 
     for ticket_number, values in tickets.items():
         if tickets[ticket_number]["deleted"] == "yes":
-            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15}")
         else:
             del deletable_tickets[ticket_number]
     return deletable_tickets
@@ -453,6 +454,123 @@ def delete_deletable_flight(deletable_tickets, ticket_number_for_deletion):
         if ticket_number in deletable_tickets and ticket_number == ticket_number_for_deletion:
             del tickets[ticket_number]
             del deletable_tickets[ticket_number]
+
+def print_all_tickets_for_purchase_date(purchase_date):
+    global tickets_fields
+
+    tickets_print_header()
+
+    for ticket_number, values in tickets.items():
+        if tickets[ticket_number]["purchase_date"] == purchase_date:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15} | {values[tickets_fields[9]]:^15} ")
+
+def print_all_tickets_for_departure_date(departure_date):
+    global tickets_fields
+
+    tickets_print_header()
+
+    for concrete_flight_number, cvalues in concrete_flights.items():
+        if concrete_flights[concrete_flight_number]["departure_date"] == departure_date:
+            for ticket_number, values in tickets.items():
+                if tickets[ticket_number]["concrete_flight_number"] == concrete_flight_number:
+                    print(
+                        f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15} | {values[tickets_fields[9]]:^15} ")
+
+def print_all_tickets_for_purchase_date_seller_username(purchase_date, seller_username):
+    global tickets_fields
+
+    tickets_print_header()
+
+    for ticket_number, values in tickets.items():
+        if tickets[ticket_number]["purchase_date"] == purchase_date and tickets[ticket_number]["seller_username"] == seller_username:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15} | {values[tickets_fields[9]]:^15} ")
+
+def print_sum_price_tickets(purchase_date):
+    total_flights = 0
+    total_price = 0
+
+    for ticket_number, values in tickets.items():
+        concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+        flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+        price = flights[flight_number]["price"]
+
+        if tickets[ticket_number]["purchase_date"] == purchase_date:
+            total_flights += 1
+            total_price = total_price + int(price)
+    print("Total flights: ", total_flights)
+    print("Total price: ", total_price)
+
+def print_sum_price_tickets_departure_date(departure_date):
+    total_flights = 0
+    total_price = 0
+
+    for concrete_flight_number, cvalues in concrete_flights.items():
+
+        flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+        price = flights[flight_number]["price"]
+
+        if concrete_flights[concrete_flight_number]["departure_date"] == departure_date:
+
+            for ticket_number, values in tickets.items():
+
+                if tickets[ticket_number]["concrete_flight_number"] == concrete_flight_number:
+                        total_flights += 1
+                        total_price = total_price + int(price)
+
+    print("Total flights: ", total_flights)
+    print("Total price: ", total_price)
+
+def print_sum_price_tickets_seller_purchase_date(purchase_date, seller_username):
+    total_flights = 0
+    total_price = 0
+
+    for ticket_number, values in tickets.items():
+
+        concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+        flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+        price = flights[flight_number]["price"]
+
+        if tickets[ticket_number]["purchase_date"] == purchase_date and tickets[ticket_number]["seller_username"] == seller_username:
+            total_flights += 1
+            total_price = total_price + int(price)
+
+    print("Total flights: ", total_flights)
+    print("Total price: ", total_price)
+
+def sum_price_tickets_last_30_days():
+
+    seller_stats = {}
+
+    today = datetime.datetime.today()
+    date_limit = today - datetime.timedelta(days=30)
+
+    for ticket_number, values in tickets.items():
+
+        purchase_date_str = tickets[ticket_number]["purchase_date"]
+        purchase_date = datetime.datetime.strptime(purchase_date_str, "%d.%m.%Y.")
+
+        if purchase_date >= date_limit:
+
+            seller = tickets[ticket_number]["seller_username"]
+
+            concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+            flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+            price = int(flights[flight_number]["price"])
+
+            if seller not in seller_stats:
+                seller_stats[seller] = {"count": 0, "price": 0}
+
+            seller_stats[seller]["count"] += 1
+            seller_stats[seller]["price"] += price
+
+    print()
+    for seller, stats in seller_stats.items():
+        print(f"Seller: {seller}")
+        print(f"Total tickets: {stats['count']}")
+        print(f"Total price: {stats['price']}")
+        print("----------------------")
+
+
 if __name__ == '__main__':
     load_all()
     # print(print_available_tickets_for_user())

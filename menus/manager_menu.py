@@ -7,6 +7,7 @@ from projekat.main import *
 import datetime
 
 flights_copy = {}
+concrete_flights_copy = {}
 
 def manager_menu():
     print("====MENU====")
@@ -23,6 +24,7 @@ def manager_menu():
     print("19) Make new flight")
     print("20) Change flight info")
     print("21) Delete tickets")
+    print("22) Generate reports")
 
 
 def search_flight_by_menu():
@@ -81,6 +83,17 @@ def change_flight_info_menu():
     print("7) Airplane model")
     print("8) Price")
     print("x) Go back to main menu")
+
+def tickets_reports_menu():
+    print("===Generate reports for===")
+    print("1) Purchase date")
+    print("2) Departure date")
+    print("3) Purchase date and seller username")
+    print("4) Purchase date, total tickets and price")
+    print("5) Departure date, total tickets and price")
+    print("6) Purchase date, seller username, total tickets and price")
+    print("7) Total tickets and price in last 30 days")
+    print("x) Go back")
 
 
 def manager_menu_main(logged_username):
@@ -143,31 +156,31 @@ def manager_menu_main(logged_username):
                 choose = input("Select one of parameters that you want to search by: ")
                 if choose == '1':
                     parameter = "departure_airport"
-                    value = input("Enter departure airport: ")
+                    value = enter_name("departure airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '2':
                     parameter = "arrival_airport"
-                    value = input("Enter arrival airport: ")
+                    value = enter_name("arrival airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '3':
                     parameter = "departure_date"
-                    value = input("Enter departure date: ")
+                    value = enter_name("departure date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '4':
                     parameter = "arrival_date"
-                    value = input("Enter arrival date: ")
+                    value = enter_name("arrival date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '5':
                     parameter = "departure_time"
-                    value = input("Enter departure time: ")
+                    value = enter_name("departure time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '6':
                     parameter = "arrival_time"
-                    value = input("Enter arrival time: ")
+                    value = enter_name("arrival time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '7':
                     parameter = "airline"
-                    value = input("Enter airline: ")
+                    value = enter_name("airline")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == 's':
                     repo.print_search_by_multiple(flights_copy, concrete_flights_copy)
@@ -345,8 +358,36 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-
-
+        elif choice == '22':
+            while True:
+                tickets_reports_menu()
+                choose = input("Enter option: ")
+                if choose == '1':
+                    purchase_date = iu.enter_name("purchase date")
+                    repo.print_all_tickets_for_purchase_date(purchase_date)
+                elif choose == '2':
+                    departure_date = enter_name("departure date")
+                    repo.print_all_tickets_for_departure_date(departure_date)
+                elif choose == '3':
+                    purchase_date = iu.enter_name("purchase date")
+                    seller_username = iu.enter_name("seller username")
+                    repo.print_all_tickets_for_purchase_date_seller_username(purchase_date, seller_username)
+                elif choose == '4':
+                    purchase_date = iu.enter_name("purchase date")
+                    repo.print_sum_price_tickets(purchase_date)
+                elif choose == '5':
+                    departure_date = iu.enter_name("departure date")
+                    repo.print_sum_price_tickets_departure_date(departure_date)
+                elif choose == '6':
+                    purchase_date = iu.enter_name("purchase date")
+                    seller_username = iu.enter_name("seller username")
+                    repo.print_sum_price_tickets_seller_purchase_date(purchase_date, seller_username)
+                elif choose == '7':
+                    repo.sum_price_tickets_last_30_days()
+                elif choose == 'x':
+                    break
+                else:
+                    print("[ERROR] Invalid input! Please try again.")
         else:
             print("[ERROR] Invalid input! Please try again.")
 # if __name__ == '__main__':

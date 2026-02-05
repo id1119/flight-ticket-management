@@ -2,6 +2,7 @@ import projekat.repository as repo
 import projekat.inputs as iu
 import copy
 from projekat.main import *
+from projekat.inputs import enter_name
 
 flights_copy = {}
 concrete_flights_copy = {}
@@ -103,31 +104,31 @@ def unregistered_menu_main():
                 choose = input("Select one of parameters that you want to search by: ")
                 if choose == '1':
                     parameter = "departure_airport"
-                    value = input("Enter departure airport: ")
+                    value = enter_name("departure airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '2':
                     parameter = "arrival_airport"
-                    value = input("Enter arrival airport: ")
+                    value = enter_name("arrival airport")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '3':
                     parameter = "departure_date"
-                    value = input("Enter departure date: ")
+                    value = enter_name("departure date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '4':
                     parameter = "arrival_date"
-                    value = input("Enter arrival date: ")
+                    value = enter_name("arrival date")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '5':
                     parameter = "departure_time"
-                    value = input("Enter departure time: ")
+                    value = enter_name("departure time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '6':
                     parameter = "arrival_time"
-                    value = input("Enter arrival time: ")
+                    value = enter_name("arrival time")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == '7':
                     parameter = "airline"
-                    value = input("Enter airline: ")
+                    value = enter_name("airline")
                     repo.search_by_multiple(flights_copy, concrete_flights_copy, parameter, value)
                 elif choose == 's':
                     repo.print_search_by_multiple(flights_copy, concrete_flights_copy)
