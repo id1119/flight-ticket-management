@@ -315,7 +315,7 @@ def is_ticket_ready_for_checkin(ticket_number, logged_username):
         departure_date + " " + departure_time,
         "%d.%m.%Y. %H:%M"
     )
-    current_dt = datetime.datetime.today()  #.replace(hour=0, minute=0, second=0, microsecond=0)
+    current_dt = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
     current_dt_min = departure_dt - datetime.timedelta(hours=48)
 
     if current_dt_min<=current_dt<=departure_dt:
