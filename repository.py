@@ -113,7 +113,7 @@ def save_all():
             writer.writerow(row)
 
     tickets_fields = [
-        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat"
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat", "deleted"
     ]
     with open("csv_files/tickets.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=tickets_fields)
@@ -131,11 +131,21 @@ flights_fields = [
     "arrival_time", "next_day_arrival", "airline", "days_of_flight", "airplane_model", "price"
 ]
 
+tickets_fields = [
+    "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "check_in", "seat", "deleted"
+                  ]
+
 def concrete_flights_print_header():
     global concrete_flights_fields
     print()
     print(f"{concrete_flights_fields[0]:^15} | {concrete_flights_fields[1]:^15} | {concrete_flights_fields[2]:^17} | {concrete_flights_fields[3]:^15} ")
     print("-" * 79)
+
+def tickets_print_header():
+    global tickets_fields
+    print()
+    print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^23} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^23} | {tickets_fields[5]:^16} | {tickets_fields[6]:^15} ")
+    print("-" * 140)
 
 def available_flights():
     today = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0) #today = današnji datum + trenutno vreme, zbog biblioteke mora ovako
@@ -265,6 +275,7 @@ def has_free_seats(concrete_flight_number):
         return free_seats
     else:
         return False
+
 def generate_ticket_number():
     max_ticket = 0
     for ticket in tickets.keys():
@@ -296,7 +307,7 @@ def print_by_dt_min_max(flights_copy, concrete_flights_copy, arrival_dt, arrival
 
 def print_available_tickets_for_user(logged_username):
     tickets_fields = [
-        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat"
+        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat", "deleted"
     ]
     print()
     print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^15} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^15} | {tickets_fields[5]:^12}")
@@ -375,6 +386,49 @@ def print_taken_seats(taken_seats, ticket_number):
         print()
     return rows
 
+def change_ticket_date(ticket_number, departure_date):
+    concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+    flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+    global concrete_flights_fields
+    today = datetime.datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+    concrete_flights_print_header()
+
+    for concrete_flight_number, values in concrete_flights.items():
+        if concrete_flights[concrete_flight_number]["flight_number"] == flight_number and concrete_flights[concrete_flight_number]["departure_date"] == departure_date:
+            departure_date = datetime.datetime.strptime(departure_date, "%d.%m.%Y.")
+            if departure_date >= today:
+                print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} ")
+
+def search_ticket_by_airport(parameter, value):
+    global tickets_fields
+
+    tickets_print_header()
+    for ticket_number, values in tickets.items():
+        concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+        flight_number = concrete_flights[concrete_flight_number]["flight_number"]
+
+        if flights[flight_number][parameter] == value:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+
+def search_ticket_by_date(parameter, value):
+    global tickets_fields
+
+    tickets_print_header()
+    for ticket_number, values in tickets.items():
+        concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
+        if concrete_flights[concrete_flight_number][parameter] == value:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+
+def search_ticket_by_name(passenger_name, passenger_last_name):
+    global tickets_fields
+
+    tickets_print_header()
+
+    for ticket_number, values in tickets.items():
+        if tickets[ticket_number]["passenger_name"] == passenger_name and tickets[ticket_number]["passenger_last_name"] == passenger_last_name:
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
 
 if __name__ == '__main__':
     load_all()

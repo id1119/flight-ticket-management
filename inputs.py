@@ -90,7 +90,7 @@ def is_concrete_flight_number_valid(concrete_flight_number):
 
 def enter_ticket_number():
     while True:
-        ticket_number = input("Enter ticket number for check-in: ")
+        ticket_number = input("Enter ticket number: ")
         try:
             _ = repo.tickets[ticket_number]
             return ticket_number
