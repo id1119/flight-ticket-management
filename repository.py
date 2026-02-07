@@ -187,7 +187,7 @@ def search_by_multiple(flights_copy, concrete_flights_copy,  parameter, value): 
 
     else:
         for concrete_flight_number in list(concrete_flights_copy.keys()):
-            if concrete_flights_copy[concrete_flight_number]["flight_number"] not in flights_copy:     #or concrete_flights[concrete_flight_number][parameter] != value:
+            if concrete_flights_copy[concrete_flight_number]["flight_number"] not in flights_copy or concrete_flights[concrete_flight_number][parameter] != value:
                 del concrete_flights_copy[concrete_flight_number]
 
 def print_search_by_multiple(flights_copy, concrete_flights_copy):
@@ -261,6 +261,10 @@ def print_search_by_multiple_concrete(flights_copy, concrete_flights_copy):
                     print(f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} ")
 
 def has_free_seats(concrete_flight_number):
+
+    if concrete_flight_number not in concrete_flights:
+        return False
+
     flight_number = concrete_flights[concrete_flight_number]["flight_number"]
 
     airplane_model = flights[flight_number]["airplane_model"]
@@ -268,12 +272,16 @@ def has_free_seats(concrete_flight_number):
     seats_in_row = len((airplane_models[airplane_model]["seats"]).split("|"))
     total_seats = int(airplane_models[airplane_model]["rows"]) * seats_in_row
     used_seats = 0
+
     for ticket, values in tickets.items():
         if tickets[ticket]["concrete_flight_number"] == concrete_flight_number:
             used_seats = used_seats + 1
+
     free_seats = total_seats - used_seats
+
     if free_seats > 0:
         return free_seats
+
     else:
         return False
 
@@ -307,15 +315,13 @@ def print_by_dt_min_max(flights_copy, concrete_flights_copy, arrival_dt, arrival
                 f"{values[concrete_flights_fields[0]]:^22} | {values[concrete_flights_fields[1]]:^15} | {values[concrete_flights_fields[2]]:^17} | {values[concrete_flights_fields[3]]:^15} ")
 
 def print_available_tickets_for_user(logged_username):
-    tickets_fields = [
-        "ticket_number", "concrete_flight_number", "buyer_username", "passenger_name", "passenger_last_name", "seat", "deleted"
-    ]
-    print()
-    print(f"{tickets_fields[0]:^15} | {tickets_fields[1]:^15} | {tickets_fields[2]:^15} | {tickets_fields[3]:^15} | {tickets_fields[4]:^15} | {tickets_fields[5]:^12}")
-    print("-" * 111)
+    global tickets_fields
+
+    tickets_print_header()
+
     for ticket_number, values in tickets.items():
         if tickets[ticket_number]["buyer_username"] == logged_username:
-            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^22} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^19} | {values[tickets_fields[5]]:^15}")
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15}")
 
 def is_ticket_ready_for_checkin(ticket_number, logged_username):
 
@@ -420,7 +426,7 @@ def search_ticket_by_date(parameter, value):
     for ticket_number, values in tickets.items():
         concrete_flight_number = tickets[ticket_number]["concrete_flight_number"]
         if concrete_flights[concrete_flight_number][parameter] == value:
-            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15}")
 
 def search_ticket_by_name(passenger_name, passenger_last_name):
     global tickets_fields
@@ -429,7 +435,7 @@ def search_ticket_by_name(passenger_name, passenger_last_name):
 
     for ticket_number, values in tickets.items():
         if tickets[ticket_number]["passenger_name"] == passenger_name and tickets[ticket_number]["passenger_last_name"] == passenger_last_name:
-            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} ")
+            print(f"{values[tickets_fields[0]]:^15} | {values[tickets_fields[1]]:^23} | {values[tickets_fields[2]]:^15} | {values[tickets_fields[3]]:^15} | {values[tickets_fields[4]]:^23} | {values[tickets_fields[5]]:^16} | {values[tickets_fields[6]]:^15} | {values[tickets_fields[7]]:^15} | {values[tickets_fields[8]]:^15}")
 
 def print_deletable_tickets(deletable_tickets):
     global tickets_fields

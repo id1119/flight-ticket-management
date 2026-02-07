@@ -189,8 +189,14 @@ def buyer_menu_main(logged_username):
                 elif choose == '2':
                     while True:
                         concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
+
                         if concrete_flight_number == 'x':
                             break
+
+                        if concrete_flight_number is None:
+                            print("[ERROR] Concrete flight not found!")
+                            continue
+
                         if not repo.has_free_seats(concrete_flight_number):
                             print("No available seats in this concrete flight, please try again.")
                             continue
@@ -203,7 +209,7 @@ def buyer_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = repo.users[logged_username]["name"]
                             last_name = repo.users[logged_username]["last_name"]
-                            today = datetime.datetime.today()
+                            today = datetime.datetime.today().strftime("%d.%m.%Y.")
                             repo.tickets[ticket_number]={
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
@@ -246,7 +252,7 @@ def buyer_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = iu.enter_name("passenger name")
                             last_name = iu.enter_name("passenger last name")
-                            today = datetime.datetime.today()
+                            today = datetime.datetime.today().strftime("%d.%m.%Y.")
                             repo.tickets[ticket_number]={
                                 # "ticket_number":ticket_number,
                                 "concrete_flight_number":concrete_flight_number,
@@ -267,7 +273,7 @@ def buyer_menu_main(logged_username):
                                     ticket_number = repo.generate_ticket_number()
                                     name = iu.enter_name("passenger name")
                                     last_name = iu.enter_name("passenger last name")
-                                    today = datetime.datetime.today()
+                                    today = datetime.datetime.today().strftime("%d.%m.%Y.")
                                     repo.tickets[ticket_number]={
                                     "concrete_flight_number":concrete_flight_number,
                                     "buyer_username": logged_username,
@@ -290,8 +296,6 @@ def buyer_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-            else:
-                print("[ERROR] Invalid input! Please try again.")
         elif choice == '11':
             repo.print_available_tickets_for_user(logged_username)
         elif choice == '12':

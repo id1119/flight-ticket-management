@@ -229,7 +229,7 @@ def seller_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = repo.users[username]["name"]
                             last_name = repo.users[username]["last_name"]
-                            today = datetime.datetime.today()
+                            today = datetime.datetime.today().strftime("%d.%m.%Y.")
                             repo.tickets[ticket_number]={
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": username,
@@ -244,7 +244,7 @@ def seller_menu_main(logged_username):
                             ticket_number = repo.generate_ticket_number()
                             name = iu.enter_name("passenger name")
                             last_name = iu.enter_name("passenger last name")
-                            today = datetime.datetime.today()
+                            today = datetime.datetime.today().strftime("%d.%m.%Y.")
                             repo.tickets[ticket_number]={
                                 "concrete_flight_number":concrete_flight_number,
                                 "buyer_username": logged_username,
@@ -298,10 +298,23 @@ def seller_menu_main(logged_username):
                             break
                     if choose == "2":
                         departure_date = iu.enter_name("departure date")
+
+                        if departure_date.lower() == "x":
+                            continue
+
                         repo.change_ticket_date(ticket_number, departure_date)
                         concrete_flight_number = iu.enter_concrete_flight_number(repo.concrete_flights)
+
+                        if concrete_flight_number.lower() == "x":
+                            continue
+
+                        if concrete_flight_number not in repo.concrete_flights:
+                            print("Concrete flight doesnt exist")
+                            continue
+
                         if not concrete_flight_number:
                             continue
+
                         repo.tickets[ticket_number]["concrete_flight_number"] = concrete_flight_number
                     if choose == "3":
                         taken_seats = repo.get_taken_seats(ticket_number)  # pravi skup zauzetih mesta

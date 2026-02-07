@@ -13,7 +13,7 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 12,CF011,mstankovic,Milica,Stankovic,no,,yes,04.02.2026.,ana_s
 13,CF012,azoric,Aleksandar,Zoric,yes,4C,no,19.01.2026.,ana_s
 14,CF013,kristinaR,Kristina,Ristic,no,,no,13.01.2026.,ana_s
-15,CF014,fsavic,Filip,Savic,no,16A,yes,13.01.2026.,
+15,CF015,fsavic,Filip,Savic,no,16A,yes,13.01.2026.,
 16,CF015,imilovanovic,Ivan,Milovanovic,no,17B,no,31.12.2025.,jef333
 17,CF016,akovacevic,Andjela,Kovacevic,yes,18C,no,28.12.2025.,jef333
 18,CF017,bvukovic,Bojan,Vukovic,no,2D,no,03.01.2026.,jef333
@@ -37,7 +37,7 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 36,CF035,sradosavljevic,Sofija,Radosavljevic,no,2A,no,20.12.2025.,ana_s
 37,CF036,btrifunovic,Boris,Trifunovic,no,3C,no,13.01.2026.,ana_s
 38,CF037,jkrstic,Jovana,Krstic,no,4D,no,02.01.2026.,ana_s
-39,CF038,ijelic,Ilija,Jelic,yes,5E,yes,15.01.2026.,ana_s
+39,CF038,ijelic,Ilija,Jelic,yes,7E,yes,15.01.2026.,ana_s
 40,CF039,mlukic,Marina,Lukic,no,6F,no,01.01.2026.,
 41,CF040,zmarkovic,Zoran,Markovic,no,7A,no,21.12.2025.,
 42,CF041,tsokolovic,Tamara,Sokolovic,no,8B,no,30.01.2026.,
@@ -102,8 +102,8 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 101,CF006,guest101,Petar,Markovic,no,27B,no,11.01.2026.,jef333
 104,CF006,guest104,Marko,Jovanovic,no,,yes,11.01.2026.,
 105,CF030,guest105,Dragan,Draganovic,no,,yes,12.01.2026.,
-106,CF014,guest106,Bojan,Popovic,no,,yes,12.01.2026.,""
-107,CF014,guest107,Milan,Kostic,no,,no,12.01.2026.,""
+106,CF014,guest106,Bojan,Popovic,no,,yes,12.01.2026.,
+107,CF014,guest107,Milan,Kostic,no,,no,12.01.2026.,
 108,CF001,marko123,Marko,Kraljevic,no,,no,08.01.2026.,ana_s
 110,CF001,ivan110,Ivan,Petrov,no,,no,12.01.2026.,ana_s
 111,CF001,aleks111,Aleksandar,Petrovic,no,,no,11.01.2026.,ana_s
@@ -282,3 +282,10 @@ ticket_number,concrete_flight_number,buyer_username,passenger_name,passenger_las
 284,CF001,nikola284,Nikola,Vuletic,no,,no,20.05.2025.,ana_s
 285,CF001,ivan285,Ivan,Markovic,no,,no,18.05.2025.,ana_s
 286,CF001,marko123,Marko,Kraljevic,no,,no,16.05.2025.,ana_s
+287,CF002,b,buyer,buyer,no,,no,07.02.2026.,online
+288,CF027,b,buyer,buyer,no,,no,07.02.2026.,online
+289,CF002,b,buyer,buyer,no,,no,07.02.2026.,online
+290,CF027,b,buyer,buyer,no,,no,07.02.2026.,online
+291,CF002,b,Mile,Stojak,no,,no,07.02.2026.,online
+292,CF002,b,Darko,Palic,no,,no,07.02.2026.,online
+293,CF005,marko123,Marko,Kraljevic,no,,no,07.02.2026.,online
