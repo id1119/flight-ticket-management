@@ -11,16 +11,16 @@ concrete_flights_copy = {}
 def buyer_menu():
     print("====MENU====")
     print("Status: buyer")
-    print("2) Exit application")
-    print("3) View available flights")
-    print("4) Search flight by")
-    print("5) Search flight by multiple parameters")
-    print("6) View 10 cheapest flights between two destinations")
-    print("7) View flights at certain date +- flexible days")
-    print("9) Logout")
-    print("10) Buy ticket")
-    print("11) View bought tickets")
-    print("12) Ticket check-in")
+    print("1) View available flights")
+    print("2) Search flight by")
+    print("3) Search flight by multiple parameters")
+    print("4) View 10 cheapest flights between two destinations")
+    print("5) View flights at certain date +- flexible days")
+    print("6) Logout")
+    print("7) Buy ticket")
+    print("8) View bought tickets")
+    print("9) Ticket check-in")
+    print("x) Exit application")
 
 def search_flight_by_menu():
     print("===Search flight by===")
@@ -57,13 +57,13 @@ def buyer_menu_main(logged_username):
     while True:
         buyer_menu()
         choice = input("Please choose functionality: ")
-        if choice == '2':
+        if choice == 'x':
             print("Exiting...")
             repo.save_all()
             return False
-        elif choice == '3':
+        elif choice == '1':
             repo.available_flights()
-        elif choice == '4':
+        elif choice == '2':
             while True:
                 search_flight_by_menu()
                 choose = input("What do you want to search by?: ")
@@ -100,7 +100,7 @@ def buyer_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '5':
+        elif choice == '3':
 
             global flights_copy
             global concrete_flights_copy
@@ -145,7 +145,7 @@ def buyer_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '6':
+        elif choice == '4':
             flights_copy = copy.deepcopy(repo.flights)
             concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
             departure_airport = input("Enter departure airport: ")
@@ -153,7 +153,7 @@ def buyer_menu_main(logged_username):
             arrival_airport = input("Enter arrival airport: ")
             repo.search_by_multiple(flights_copy, concrete_flights_copy,"arrival_airport", arrival_airport)
             repo.print_ten_cheapest_flights(flights_copy)
-        elif choice == '7':
+        elif choice == '5':
             while True:
                 flights_copy = copy.deepcopy(repo.flights)
                 concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
@@ -171,9 +171,9 @@ def buyer_menu_main(logged_username):
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
-        elif choice == '9':
+        elif choice == '6':
             return "unregistered"
-        elif choice == '10':
+        elif choice == '7':
             while True:
                 buy_ticket_menu()
                 choose = input("Enter option: ")
@@ -296,9 +296,9 @@ def buyer_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '11':
+        elif choice == '8':
             repo.print_available_tickets_for_user(logged_username)
-        elif choice == '12':
+        elif choice == '9':
             ticket_number = iu.enter_ticket_number()        #unosi broj karte
 
             if not repo.is_ticket_ready_for_checkin(ticket_number, logged_username): #provera da li je spremno za cekiranje

@@ -11,13 +11,13 @@ def unregistered_menu():
     print("====MENU====")
     print("Status: unregistered")
     print("1) Login")
-    print("2) Exit application")
-    print("3) View available flights")
-    print("4) Search flight by")
-    print("5) Search flight by multiple parameters")
-    print("6) View 10 cheapest flights between two destinations")
-    print("7) View flights at certain date +- flexible days")
-    print("8) Register")
+    print("2) View available flights")
+    print("3) Search flight by")
+    print("4) Search flight by multiple parameters")
+    print("5) View 10 cheapest flights between two destinations")
+    print("6) View flights at certain date +- flexible days")
+    print("7) Register")
+    print("x) Exit application")
 
 def search_flight_by_menu():
     print("===Search flight by===")
@@ -49,13 +49,13 @@ def unregistered_menu_main():
         if choice == '1':  # login
             username = iu.login()  # vraca naziv ulogovanog
             return username
-        elif choice == '2':
+        elif choice == 'x':
             print("Exiting...")
             repo.save_all()
             return False
-        elif choice == '3':
+        elif choice == '2':
             repo.available_flights()
-        elif choice == '4':
+        elif choice == '3':
             while True:
                 search_flight_by_menu()
                 choose = input("What do you want to search by?: ")
@@ -92,7 +92,7 @@ def unregistered_menu_main():
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '5':
+        elif choice == '4':
 
             global flights_copy
             global concrete_flights_copy
@@ -137,7 +137,7 @@ def unregistered_menu_main():
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '6':
+        elif choice == '5':
             flights_copy = copy.deepcopy(repo.flights)
             concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
             departure_airport = input("Enter departure airport: ")
@@ -145,7 +145,7 @@ def unregistered_menu_main():
             arrival_airport = input("Enter arrival airport: ")
             repo.search_by_multiple(flights_copy, concrete_flights_copy,"arrival_airport", arrival_airport)
             repo.print_ten_cheapest_flights(flights_copy)
-        elif choice == '7':
+        elif choice == '6':
             while True:
                 flights_copy = copy.deepcopy(repo.flights)
                 concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
@@ -163,7 +163,7 @@ def unregistered_menu_main():
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
-        elif choice == '8':
+        elif choice == '7':
             username = iu.enter_name("username")
             password = iu.enter_name("password")
             name = iu.enter_name("name")

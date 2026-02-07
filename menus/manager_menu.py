@@ -12,19 +12,20 @@ concrete_flights_copy = {}
 def manager_menu():
     print("====MENU====")
     print("Status: manager")
-    print("2) Exit application")
-    print("3) View available flights")
-    print("4) Search flight by")
-    print("5) Search flight by multiple parameters")
-    print("6) View 10 cheapest flights between two destinations")
-    print("7) View flights at certain date +- flexible days")
-    print("9) Logout")
-    print("17) Search ticket by")
-    print("18) Register new seller")
-    print("19) Make new flight")
-    print("20) Change flight info")
-    print("21) Delete tickets")
-    print("22) Generate reports")
+    print("1) View available flights")
+    print("2) Search flight by")
+    print("3) Search flight by multiple parameters")
+    print("4) View 10 cheapest flights between two destinations")
+    print("5) View flights at certain date +- flexible days")
+    print("6) Logout")
+    print("7) Search ticket by")
+    print("8) Register new seller")
+    print("9) Make new flight")
+    print("10) Change flight info")
+    print("11) Delete tickets")
+    print("12) Generate reports")
+    print("x) Exit application")
+
 
 
 def search_flight_by_menu():
@@ -101,13 +102,13 @@ def manager_menu_main(logged_username):
     while True:
         manager_menu()
         choice = input("Please choose functionality: ")
-        if choice == '2':
+        if choice == 'x':
             print("Exiting...")
             repo.save_all()
             return False
-        elif choice == '3':
+        elif choice == '1':
             repo.available_flights()
-        elif choice == '4':
+        elif choice == '2':
             while True:
                 search_flight_by_menu()
                 choose = input("What do you want to search by?: ")
@@ -144,7 +145,7 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '5':
+        elif choice == '3':
 
             global flights_copy
             global concrete_flights_copy
@@ -189,7 +190,7 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '6':
+        elif choice == '4':
             flights_copy = copy.deepcopy(repo.flights)
             concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
             departure_airport = input("Enter departure airport: ")
@@ -197,7 +198,7 @@ def manager_menu_main(logged_username):
             arrival_airport = input("Enter arrival airport: ")
             repo.search_by_multiple(flights_copy, concrete_flights_copy, "arrival_airport", arrival_airport)
             repo.print_ten_cheapest_flights(flights_copy)
-        elif choice == '7':
+        elif choice == '5':
             while True:
                 flights_copy = copy.deepcopy(repo.flights)
                 concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
@@ -215,9 +216,9 @@ def manager_menu_main(logged_username):
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
-        elif choice == '9':
+        elif choice == '6':
             return "unregistered"
-        elif choice == '17':
+        elif choice == '7':
             while True:
                 search_ticket_by_menu()
                 choose = input("Enter option: ")
@@ -245,7 +246,7 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '18':
+        elif choice == '8':
             username = iu.enter_name("username")
             password = iu.enter_name("password")
             name = iu.enter_name("name")
@@ -268,7 +269,7 @@ def manager_menu_main(logged_username):
                 "citizenship" : citizenship,
                 "gender" : gender,
             }
-        elif choice == '19':
+        elif choice == '9':
             flight_number = iu.enter_name("flight number").upper()
             departure_airport = iu.enter_name("departure airport").upper()
             arrival_airport = iu.enter_name("arrival airport").upper()
@@ -290,7 +291,7 @@ def manager_menu_main(logged_username):
                 "airplane_model":airplane_model,
                 "price":price
             }
-        elif choice == '20':
+        elif choice == '10':
             while True:
                 print("===Edit flight info===")
                 print("x) Go back")
@@ -333,7 +334,7 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '21':
+        elif choice == '11':
             deletable_tickets = copy.deepcopy(repo.tickets)
 
             deletable_tickets = repo.print_deletable_tickets(deletable_tickets)
@@ -358,7 +359,7 @@ def manager_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '22':
+        elif choice == '12':
             while True:
                 tickets_reports_menu()
                 choose = input("Enter option: ")

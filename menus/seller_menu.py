@@ -12,18 +12,19 @@ concrete_flights_copy = {}
 def seller_menu():
     print("====MENU====")
     print("Status: seller")
-    print("2) Exit application")
-    print("3) View available flights")
-    print("4) Search flight by")
-    print("5) Search flight by multiple parameters")
-    print("6) View 10 cheapest flights between two destinations")
-    print("7) View flights at certain date +- flexible days")
-    print("9) Logout")
-    print("13) Buy ticket")
-    print("14) Check-in")
-    print("15) Change ticket info")
-    print("16) Delete ticket")
-    print("17) Search ticket by")
+    print("1) View available flights")
+    print("2) Search flight by")
+    print("3) Search flight by multiple parameters")
+    print("4) View 10 cheapest flights between two destinations")
+    print("5) View flights at certain date +- flexible days")
+    print("6) Logout")
+    print("7) Buy ticket")
+    print("8) Check-in")
+    print("9) Change ticket info")
+    print("10) Delete ticket")
+    print("11) Search ticket by")
+    print("x) Exit application")
+
 
 
 
@@ -77,13 +78,13 @@ def seller_menu_main(logged_username):
     while True:
         seller_menu()
         choice = input("Please choose functionality: ")
-        if choice == '2':
+        if choice == 'x':
             print("Exiting...")
             repo.save_all()
             return False
-        elif choice == '3':
+        elif choice == '1':
             repo.available_flights()
-        elif choice == '4':
+        elif choice == '2':
             while True:
                 search_flight_by_menu()
                 choose = input("What do you want to search by?: ")
@@ -120,7 +121,7 @@ def seller_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '5':
+        elif choice == '3':
 
             global flights_copy
             global concrete_flights_copy
@@ -165,7 +166,7 @@ def seller_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input!")
-        elif choice == '6':
+        elif choice == '4':
             flights_copy = copy.deepcopy(repo.flights)
             concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
             departure_airport = input("Enter departure airport: ")
@@ -173,7 +174,7 @@ def seller_menu_main(logged_username):
             arrival_airport = input("Enter arrival airport: ")
             repo.search_by_multiple(flights_copy, concrete_flights_copy, "arrival_airport", arrival_airport)
             repo.print_ten_cheapest_flights(flights_copy)
-        elif choice == '7':
+        elif choice == '5':
             while True:
                 flights_copy = copy.deepcopy(repo.flights)
                 concrete_flights_copy = copy.deepcopy(repo.concrete_flights)
@@ -191,9 +192,9 @@ def seller_menu_main(logged_username):
                     break
                 except Exception:
                     print("[ERROR] Invalid date!")
-        elif choice == '9':
+        elif choice == '6':
             return "unregistered"
-        elif choice == '13':
+        elif choice == '7':
             while True:
                 buy_ticket_menu()
                 choose = input("Enter option: ")
@@ -263,7 +264,7 @@ def seller_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '14':
+        elif choice == '8':
             ticket_number = iu.enter_ticket_number()  # unosi broj karte
 
             if not repo.is_ticket_ready_for_checkin(ticket_number,
@@ -275,7 +276,7 @@ def seller_menu_main(logged_username):
                                           ticket_number)  # ispisuje sva zauzeta sedista i vraca broj redova
 
             repo.tickets[ticket_number]["seat"] = iu.enter_seat(taken_seats, rows)  # unos sedista
-        elif choice == '15':
+        elif choice == '9':
             while True:
                 print("===Change ticket info===")
                 print("x) Go back")
@@ -326,7 +327,7 @@ def seller_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '16':
+        elif choice == '10':
             while True:
                 print("===Delete ticket===")
                 print("x) Go back")
@@ -349,7 +350,7 @@ def seller_menu_main(logged_username):
                     break
                 else:
                     print("[ERROR] Invalid input! Please try again.")
-        elif choice == '17':
+        elif choice == '11':
             while True:
                 search_ticket_by_menu()
                 choose = input("Enter option: ")
