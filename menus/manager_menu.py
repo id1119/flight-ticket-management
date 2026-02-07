@@ -99,7 +99,7 @@ def tickets_reports_menu():
 def manager_menu_main(logged_username):
     repo.load_all()
     while True:
-        print(manager_menu())
+        manager_menu()
         choice = input("Please choose functionality: ")
         if choice == '2':
             print("Exiting...")

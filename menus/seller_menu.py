@@ -75,7 +75,7 @@ def search_ticket_by_menu():
 def seller_menu_main(logged_username):
     repo.load_all()
     while True:
-        print(seller_menu())
+        seller_menu()
         choice = input("Please choose functionality: ")
         if choice == '2':
             print("Exiting...")

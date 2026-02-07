@@ -55,7 +55,7 @@ def buyer_menu_main(logged_username):
     repo.load_all()
     global flights_copy
     while True:
-        print(buyer_menu())
+        buyer_menu()
         choice = input("Please choose functionality: ")
         if choice == '2':
             print("Exiting...")

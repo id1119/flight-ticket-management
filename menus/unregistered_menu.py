@@ -44,7 +44,7 @@ def search_flight_by_multiple_menu():
 def unregistered_menu_main():
     repo.load_all()
     while True:
-        print(unregistered_menu())
+        unregistered_menu()
         choice = input("Please choose functionality: ")
         if choice == '1':  # login
             username = iu.login()  # vraca naziv ulogovanog
