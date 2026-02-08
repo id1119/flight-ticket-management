@@ -27,7 +27,7 @@ def enter_email():
             user, domen = email.split("@")
             name, com = domen.split(".")
             return email
-        except:
+        except Exception:
             print(f"[ERROR] Invalid email, please try again.")
 
 def enter_passport_optional():
